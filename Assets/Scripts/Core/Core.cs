@@ -27,6 +27,9 @@ public class Core : MonoBehaviour {
 	// Generated from mySets at round launch
 	List<Question> myQuestions;
 
+	// Holds each question results in an element
+	List<Results> myResults;
+
 /*
  * DataBase Hooks
  */
@@ -125,20 +128,51 @@ public class Core : MonoBehaviour {
 	 * Starts a round with the current settings
 	 */
 	public IEnumerator startGame (){
+
+		// Clear old results
+		myResults = new List<Results> ();
+
 		// Shuffle questions before asking
 		shuffle (myQuestions);
 
 		// Keep asking questions until continueGame conditions are no longer met
 		while (continueGame()) {
-			askQuestion();
+			askQuestion ();
+		
+
+			// Wait for all players to answer
+			while (playersLeftToAnswer()>0) {
+				yield return new WaitForSeconds (0.1f);
+			}
+
+			// Grade all answers to the current question
+			Results tempResults = new Results ();
+			tempResults.originalQuestion = myQuestions [0];
+			foreach (Player i in players) {
+				grade (tempResults, i);
+			}
+			myResults.Add (tempResults);
+
+			// Push the results to the GUI to display
+			foreach(Player i in players)
+				i.isReady=false;
+
+			foreach(GUI i in myGUIs)
+				i.questionResults(tempResults);
+
+			// Wait for all players to be ready
+			while (playersNotReady()>0) {
+				yield return new WaitForSeconds (0.1f);
+			}
+
+			// Delete current question from question lists
+			myQuestions.Remove (myQuestions [0]);
 		}
 
-		// Wait for all players to answer
-		while(playersLeftToAnswer()>0){
-			yield return new WaitForSeconds(0.1f);
-		}
-
-		// TODO Left off here
+		// The round is now over
+		// Push final resutls to GUI
+		foreach (GUI i in myGUIs)
+			i.finalResults (myResults);
 	}
 
 /**
@@ -149,7 +183,6 @@ public class Core : MonoBehaviour {
 	 * Records a player's answer for the current question
 	 */
 	public void answerQuestion (Player myPlayer, Answer myAnswer){
-		// TODO Left off here
 		myPlayer.lastAnswer = myAnswer;
 	}
 
@@ -175,17 +208,22 @@ public class Core : MonoBehaviour {
 	 * Retruns true iff we can ask another question
 	 */
 	bool continueGame(){
-		// TODO Make a real check
-		return true;
+		// See if we have any questions left in the list
+		// Later add option for timed countdown
+		return myQuestions.Count>0;
 	}
 
 	/**
 	 * Steps to ask a question
 	 */
 	void askQuestion(){
-		// TODO Left off here
+		// Clear old answers
 		foreach (Player i in players)
 			i.lastAnswer = null;
+
+		// Push new question to all screens
+		foreach(GUI i in myGUIs)
+			i.nextQuestion (myQuestions [0]);
 	}
 
 	/**
@@ -208,6 +246,40 @@ public class Core : MonoBehaviour {
 			if(i.lastAnswer!=null) result++;
 		}
 		return result;
+	}
+
+	/**
+	 * Returns how many players are not ready to move on
+	 */
+	int playersNotReady(){
+		int result=0;
+		foreach (Player i in players) {
+			if(!i.isReady) result++;
+		}
+		return result;
+	}
+
+	/**
+	 * Grades the player's answer and stores the result
+	 */
+	void grade(Results myResults, Player myPlayer){
+		// Add player
+		myResults.players.Add (myPlayer);
+
+		// Add player's answer
+		myResults.playerAnswers.Add (myPlayer.lastAnswer);
+
+		// Grade answer
+		switch (myPlayer.lastAnswer.myQuestionType) {
+			// Compare multiple choice answers
+			case QuestionType.MultipleChoice:
+				myResults.isCorrect.Add(myPlayer.lastAnswer.multipleChoiceAnswer == myResults.originalQuestion.correctAnswer.multipleChoiceAnswer);
+				break;
+
+			default:myResults.isCorrect.Add(false);
+				break;
+
+		}
 	}
 
 	/**

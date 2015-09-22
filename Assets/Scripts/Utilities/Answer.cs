@@ -5,21 +5,21 @@ public class Answer {
 	/**
 	 * The type of question being answered
 	 */
-	QuestionType myQuestionType;
+	public QuestionType myQuestionType;
 
 	/**
 	 * The answer for a multiple choice question
 	 * a, b, c, d, e, ..., etc.
 	 */
-	char multipleChoiceAnswer;
+	public char multipleChoiceAnswer;
 
 	/**
 	 * The text of the multiple choice (optional)
 	 */
-	char multipleChoiceAnswerText;
+	public char multipleChoiceAnswerText;
 
 	/** 
 	 * The answer for a short answer question
 	 */
-	string shortAnswer;
+	public string shortAnswer;
 }

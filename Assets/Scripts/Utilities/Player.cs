@@ -29,4 +29,9 @@ public class Player {
 	 */
 	public Answer lastAnswer;
 
+	/** 
+	 * True iff the player is ready to move to the next step
+	 */
+	public bool isReady;
+
 }
