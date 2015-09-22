@@ -4,7 +4,7 @@
 
 public class Set {
 
-	string filename;
-	Question[] myQuestions;
+	public string filename;
+	public Question[] myQuestions;
 
 }
