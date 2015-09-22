@@ -24,4 +24,14 @@ public class Player {
 	 */
 	static int lastPlayerID=0;
 
+	/**
+	 * The player's last answer. Set to null at beginning of question
+	 */
+	public Answer lastAnswer;
+
+	/** 
+	 * True iff the player is ready to move to the next step
+	 */
+	public bool isReady;
+
 }

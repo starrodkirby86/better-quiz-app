@@ -1,7 +1,7 @@
 ﻿/**
  * The DataBase stores all questions and sets into XML files as well as parsing XML files into classes
  */
-public class DataBase : MonoBehaviour {
+public class DataBase {
 
 /*
  * Core Hooks
@@ -40,21 +40,5 @@ public class DataBase : MonoBehaviour {
 	 */
 	public void deleteQuestion (Set parent, Question child){
 		
-	}
-
-/*
- * References to Objects
- */
-
-	public Core core;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

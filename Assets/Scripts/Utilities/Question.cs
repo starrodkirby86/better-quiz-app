@@ -5,17 +5,19 @@ public class Question {
 	/**
 	 * The type of question being asked
 	 */
-	QuestionType myQuestionType;
+	public QuestionType myQuestionType;
 
 	/**
 	 * Question Text
 	 */
-	string QuestionText;
+	public string QuestionText;
 
 	/**
 	 * Possible answers
 	 * Could be multiple choice selections
 	 * Could be short answer example response
 	 */
-	Answer[] answers;
+	public Answer[] answers;
+
+	public Answer correctAnswer;
 }

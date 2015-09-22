@@ -1,4 +1,6 @@
-﻿/**
+﻿using System.Collections.Generic;
+
+/**
  * The GUI is responsible for all user interaction. It displays everything to the user (duh!) as well as grabbing user input]
  */
 public class GUI {
@@ -24,7 +26,7 @@ public class GUI {
 	/**
 	 * Tells the GUI what the final results are and that it should display them on the screen. Each element in the array is for a different question
 	 */
-	public void finalResults (Results[] theResults){
+	public void finalResults (List<Results> theResults){
 		
 	}
 
