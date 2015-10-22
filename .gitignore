@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 @@ -0,0 +1,21 @@
+=======
+>>>>>>> refs/remotes/origin/master
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -19,4 +22,10 @@
 *.pidb.meta
 
 # Unity3D Generated File On Crash Reports
+<<<<<<< HEAD
 sysinfo.txt
+=======
+sysinfo.txt
+ProjectSettings/ProjectVersion.txt
+ProjectSettings/ProjectVersion.txt
+>>>>>>> refs/remotes/origin/master
