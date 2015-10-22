@@ -4,22 +4,19 @@
 public class Answer {
 	/**
 	 * The type of question being answered
+	 * ex: MultipleChoice, ShortAnswer
 	 */
 	public QuestionType myQuestionType;
 
 	/**
 	 * The answer for a multiple choice question
-	 * a, b, c, d, e, ..., etc.
+	 * ex: a, b, c, d, e, ..., etc.
 	 */
 	public char multipleChoiceAnswer;
 
-	/**
-	 * The text of the multiple choice (optional)
-	 */
-	public char multipleChoiceAnswerText;
-
 	/** 
 	 * The answer for a short answer question
+	 * ex: 5, 2, 7, Fresno
 	 */
-	public string shortAnswer;
+	public string textAnswer;
 }
