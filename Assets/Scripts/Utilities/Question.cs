@@ -3,21 +3,31 @@
  */
 public class Question {
 	/**
-	 * The type of question being asked
-	 */
-	public QuestionType myQuestionType;
-
-	/**
 	 * Question Text
 	 */
-	public string QuestionText;
+	string questionText;
+	string correctAnswer;
 
-	/**
-	 * Possible answers
-	 * Could be multiple choice selections
-	 * Could be short answer example response
-	 */
-	public Answer[] answers;
+	public Question(string text, string answer) {
+		questionText = text;
+		correctAnswer = answer;
+	}
 
-	public Answer correctAnswer;
+	// At the moment, this checks directly; eventually it'll let you have 1 character off
+	// for every 4 characters beyond 1 in the answer to compensate for spelling errors
+	public bool checkCorrectness(string submission) {
+		if (submission == correctAnswer) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public string getQuestion() {
+		return questionText;
+	}
+
+	public string getAnswer() {
+		return correctAnswer;
+	}
 }

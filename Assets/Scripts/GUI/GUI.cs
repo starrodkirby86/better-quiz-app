@@ -4,7 +4,6 @@
  * The GUI is responsible for all user interaction. It displays everything to the user (duh!) as well as grabbing user input]
  */
 public class GUI {
-
 /*
  * Core Hooks
  */
