@@ -18,16 +18,26 @@ public class Core : MonoBehaviour {
 /*
  * Internal Variables
  */
-	// All players in the round
+	/**
+	 * All players in this round.
+	 * Populated in setupGame
+	 */
 	List<Player> players = new List<Player>();
 
-	// Sets to be used for the round
+	/**
+	 * Sets to be used for the round
+	 * Populated in setupGame
+	 */
 	List<Set> mySets;
 
-	// Generated from mySets at round launch
+	/**
+	 * Generated from mySets at round launch
+	 */
 	List<Question> myQuestions;
 
-	// Holds each question results in an element
+	/**
+	 * Holds the results to every question that has been asked
+	 */
 	List<Results> myResults;
 
 /*
@@ -81,14 +91,14 @@ public class Core : MonoBehaviour {
 		// add a dummy player
 		addPlayer ("P1");
 		
-		// load sets
-		Set[] tempSet = getAllSets ();
+		// load sets from database
+		Set[] allSets = getAllSets ();
 		
 		//clear sets from last round
 		mySets=new List<Set>();
 		
 		// use all sets
-		foreach (Set i in tempSet) {
+		foreach (Set i in allSets) {
 			useSet(i);
 		}
 		
@@ -158,7 +168,7 @@ public class Core : MonoBehaviour {
 				i.isReady=false;
 
 			foreach(GUI i in myGUIs)
-				i.questionResults(tempResults);
+				i.displayQuestionResults(tempResults);
 
 			// Wait for all players to be ready
 			while (playersNotReady()>0) {
@@ -172,7 +182,7 @@ public class Core : MonoBehaviour {
 		// The round is now over
 		// Push final resutls to GUI
 		foreach (GUI i in myGUIs)
-			i.finalResults (myResults);
+			i.displayFinalResults (myResults);
 	}
 
 /**

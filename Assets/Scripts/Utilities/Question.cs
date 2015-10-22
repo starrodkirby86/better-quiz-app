@@ -23,5 +23,10 @@ public class Question {
 	 */
 	public Answer[] answers;
 
+	/**
+	 * The correct answer to the question.
+	 * ex: For multiple choice, it would contain the correct choice and answer text
+	 * ex: For short answer, it would contain a model answer to the question
+	 */
 	public Answer correctAnswer;
 }

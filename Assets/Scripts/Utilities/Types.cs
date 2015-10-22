@@ -1,7 +1,7 @@
 ﻿/**
  * An enumerated type to differentiate between different GUI scenes
  */
-public enum Scene {Menu, Start, AskQuestion, EndGame};
+public enum Scene {Menu, Start, AskQuestion, GameOver};
 
 /**
  * An enumerated type to differentiate between different Question Types
