@@ -15,7 +15,8 @@ public class DataBase {
 	}
 	
 	/**
-	 * Returns an array containing all loaded question sets
+	 * Returns an array containing all loaded question sets.
+	 * Each question set contains questions
 	 */
 	public Set[] getAllSets(){
 		return new Set[0];
