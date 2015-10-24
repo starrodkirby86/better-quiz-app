@@ -10,7 +10,7 @@ using System.Xml;
 
 public class DataBase {
 
-	List<Set> setCollection;
+	public List<Set> setCollection;
 /*
  * Core Hooks
  */

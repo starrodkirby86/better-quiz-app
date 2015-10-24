@@ -2,6 +2,11 @@
  * Utility Class to hold a set of Questions. Each set will correspond to an XML file
  */
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Collections.Generic;
+using System.Xml;
 
 public class Set {
 

@@ -24,6 +24,8 @@ public class Question {
 	}
 
 	public string getQuestion() {
+		//Debug.Log ("XML is SeXML");
+		//Debug.Log (questionText);
 		return questionText;
 	}
 
