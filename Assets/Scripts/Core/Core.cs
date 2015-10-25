@@ -76,4 +76,9 @@ public class Core : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public void obama() {
+		Text display = gameObject.GetComponent<Text> ();
+		display.text = myDataBase.setCollection [0].nextQuestion ();
+	}
 }
