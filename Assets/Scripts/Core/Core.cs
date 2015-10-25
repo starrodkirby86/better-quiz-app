@@ -81,4 +81,24 @@ public class Core : MonoBehaviour {
 		Text display = gameObject.GetComponent<Text> ();
 		display.text = myDataBase.setCollection [0].nextQuestion ();
 	}
+
+	public void compare_answer()
+	{
+		GameObject koala = GameObject.Find("bacon_wedding");
+		InputField wombats = koala.GetComponent<InputField>();
+
+		AudioSource wow = koala.GetComponent<AudioSource> ();
+		//AudioSource wow2 = koala.GetComponent<AudioSource> ();
+
+		/* Let's check answer ! */
+		if (myDataBase.setCollection [0].checkAnswer (wombats.text))
+		{
+			wow.Play ();
+		}
+		else
+		{
+			//wow2.Play ();
+			Debug.Log ("You suck");
+		}
+	}
 }
