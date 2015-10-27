@@ -1,5 +1,5 @@
 ﻿/**
- * The DataBase stores all questions and sets into XML files as well as parsing XML files into classes
+ * The DataBase stores all cards and binders into XML files as well as parsing XML files into classes
  */
 public class DataBase {
 
@@ -10,36 +10,45 @@ public class DataBase {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public Set addXML(string filename){
-		return new Set ();
+	public Binder addXML(string filename){
+		return new Binder ();
 	}
 	
 	/**
 	 * Returns an array containing all loaded question sets.
 	 * Each question set contains questions
 	 */
-	public Set[] getAllSets(){
-		return new Set[0];
+	public Binder[] getAllBinders(){
+		return new Binder[0];
 	}
 	
 	/** 
 	 * Returns an array containing all questions from the parent set
 	 */
-	public Question[] getAllQuestions (Set parent){
-		return new Question[0];
+	public Card[] getAllCards (Binder parent){
+		return new Card[0];
 	}
 	
 	/**
-	 * Adds a question to a set
+	 * Adds a question card to a binder
 	 */
-	public void addQuestion (Set parent, Question child){
+	public void addCard (Binder parent, Card child){
 		
 	}
 	
 	/**
 	 * Deletes a question from a set
 	 */
-	public void deleteQuestion (Set parent, Question child){
+	public void deleteCard (Binder parent, Card child){
 		
+	}
+
+	/**
+	 * Saves out all binders to disk
+	 * returns: true if the write was successful
+	 * 			false if the write failled
+	 */
+	public bool save(){
+
 	}
 }

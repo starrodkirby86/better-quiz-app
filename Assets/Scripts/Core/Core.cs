@@ -25,15 +25,10 @@ public class Core : MonoBehaviour {
 	List<Player> players = new List<Player>();
 
 	/**
-	 * Sets to be used for the round
+	 * Cards to be used for the round
 	 * Populated in setupGame
 	 */
-	List<Set> mySets;
-
-	/**
-	 * Generated from mySets at round launch
-	 */
-	List<Question> myQuestions;
+	Deck myDeck;
 
 	/**
 	 * Holds the results to every question that has been asked
@@ -47,36 +42,36 @@ public class Core : MonoBehaviour {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public Set addXML(string filename){
+	public Binder addXML(string filename){
 		return myDataBase.addXML (filename);
 	}
 
 	/**
-	 * Returns an array containing all loaded question sets
+	 * Returns an array containing all loaded binders
 	 */
-	public Set[] getAllSets(){
-		return myDataBase.getAllSets();
+	public Binder[] getAllBinders(){
+		return myDataBase.getAllBinders();
 	}
 
 	/** 
-	 * Returns an array containing all questions from the parent set
+	 * Returns an array containing all question cards from the parent bidner
 	 */
-	public Question[] getAllQuestions (Set parent){
-		return myDataBase.getAllQuestions(parent);
+	public Card[] getAllCards (Binder parent){
+		return myDataBase.getAllCards(parent);
 	}
 
 	/**
-	 * Adds a question to a set
+	 * Adds a question to a binder
 	 */
-	public void addQuestion (Set parent, Question child){
-		myDataBase.addQuestion (parent, child);
+	public void addCard (Binder parent, Card child){
+		myDataBase.addCard(parent, child);
 	}
 
 	/**
-	 * Deletes a question from a set
+	 * Deletes a question from a binder
 	 */
-	public void deleteQuestion (Set parent, Question child){
-		myDataBase.deleteQuestion (parent, child);
+	public void deleteCard (Binder parent, Card child){
+		myDataBase.deleteCard (parent, child);
 	}
 
 /*
@@ -92,18 +87,18 @@ public class Core : MonoBehaviour {
 		addPlayer ("P1");
 		
 		// load sets from database
-		Set[] allSets = getAllSets ();
+		Binder[] allBinders = getAllBinders();
 		
-		//clear sets from last round
-		mySets=new List<Set>();
+		// initialize deck
+		myDeck.addManyBinders(allBinders);
 		
 		// use all sets
-		foreach (Set i in allSets) {
-			useSet(i);
+		foreach (Binder i in allBinders) {
+			useBinder(i);
 		}
 		
 		// Make a list of possible questions to ask from mySets
-		myQuestions = new List<Question> ();
+		myCards = new List<Question> ();
 		foreach (Set i in mySets) foreach (Question j in i.myQuestions) {
 			myQuestions.Add(j);
 		}
@@ -123,15 +118,15 @@ public class Core : MonoBehaviour {
 	/**
 	 * Use a set for this round
 	 */
-	public void useSet (Set mySet){
-		mySets.Add (mySet);
+	public void useBinder (Binder myBinder){
+		myBinders.add (myBinder);
 	}
 
 	/**
 	 * No longer use a set for this round
 	 */
-	public void disUseSet(Set mySet){
-		mySets.Remove (mySet);
+	public void disUseBidner(Binder myBinders){
+		myBinders.remove (myBinder);
 	}
 
 	/**

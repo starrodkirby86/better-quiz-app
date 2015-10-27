@@ -1,7 +1,7 @@
 ﻿/** 
  * Utility Class used to pass question data between modules
  */
-public class Question {
+public class Card {
 	/**
 	 * The type of question being asked
 	 * ex: MultipleChoice, ShortAnswer
