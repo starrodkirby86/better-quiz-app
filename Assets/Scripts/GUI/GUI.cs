@@ -15,7 +15,7 @@ public class GUI {
 	 * After the player has answered the question, the GUI will report the answer back to the Core.
 	 * The next GUI task will occur when all the players have answered the question. The Core will then calculate the results and call displayQuestionResults
 	 */
-	public void nextQuestion (Question nextQuestion){
+	public void nextQuestion (Card nextQuestion){
 		
 	}
 

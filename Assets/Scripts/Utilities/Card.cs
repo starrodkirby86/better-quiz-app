@@ -1,7 +1,7 @@
 ﻿/** 
  * Utility Class used to pass question data between modules
  */
-public class Question {
+public class Card {
 	/**
 	 * The type of question being asked
 	 * ex: MultipleChoice, ShortAnswer
@@ -29,4 +29,9 @@ public class Question {
 	 * ex: For short answer, it would contain a model answer to the question
 	 */
 	public Answer correctAnswer;
+
+	/**
+	 * True if this card should be placed into the deck
+	 */
+	public bool includeCard;
 }

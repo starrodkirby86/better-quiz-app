@@ -9,7 +9,7 @@ public class Results {
 	 * The question that was asked.
 	 * It also contains the correct answer to the question
 	 */
-	public Question originalQuestion;
+	public Card originalQuestion;
 
 	/**
 	 * An array of every player who answered the question.

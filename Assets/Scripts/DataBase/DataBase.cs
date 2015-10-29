@@ -1,5 +1,9 @@
-﻿/**
- * The DataBase stores all questions and sets into XML files as well as parsing XML files into classes
+﻿using UnityEngine; // For Random
+using System.Collections.Generic; // For lists
+
+/**
+ * The DataBase stores all cards and binders into XML files as well as parsing XML files into classes
+ * It also generates a deck based on user preferences
  */
 public class DataBase {
 
@@ -10,36 +14,57 @@ public class DataBase {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public Set addXML(string filename){
-		return new Set ();
+	public void addBinderFromXML(string filename){
+
 	}
-	
+
 	/**
-	 * Returns an array containing all loaded question sets.
-	 * Each question set contains questions
+	 * Saves out all binders to disk
+	 * returns: true if the write was successful
+	 * 			false if the write failled
 	 */
-	public Set[] getAllSets(){
-		return new Set[0];
+	public bool saveBinders(){
+		return true; // Pretend everything saved
 	}
-	
-	/** 
-	 * Returns an array containing all questions from the parent set
-	 */
-	public Question[] getAllQuestions (Set parent){
-		return new Question[0];
-	}
-	
+
+/**
+ * Functions to configure the deck generation
+ */
 	/**
-	 * Adds a question to a set
+	 * Compile the deck
 	 */
-	public void addQuestion (Set parent, Question child){
-		
+	public Deck generateDeck(){
+		Deck result = new Deck ();
+
+		/**
+		 * Generate the deck here
+		 */
+
+		result.shuffleDeck ();
+		return result;
 	}
-	
+
 	/**
-	 * Deletes a question from a set
+	 * Set the maximum number of cards to put in the deck
 	 */
-	public void deleteQuestion (Set parent, Question child){
-		
+	public void setMaxNumberOfCards(int max){
+		deckPreferences.numberOfCards = max;
 	}
+
+/**
+ * Functions to modify the binders
+ */
+	/**
+	 * Read the binders
+	 */
+	public Binder[] viewBinders(){
+		return loadedBinders.ToArray ();
+	}
+
+/**
+ * Internal Variabes
+ */
+	List<Binder> loadedBinders = new List<Binder> ();
+	GenerationPreferences deckPreferences = new GenerationPreferences();
+
 }
