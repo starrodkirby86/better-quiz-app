@@ -10,7 +10,7 @@ public class DataBase {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public Binder addXML(string filename){
+	public Binder addBinderFromXML(string filename){
 		return new Binder ();
 	}
 	
@@ -49,6 +49,6 @@ public class DataBase {
 	 * 			false if the write failled
 	 */
 	public bool save(){
-
+		return true; // Pretend everything saved
 	}
 }

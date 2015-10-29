@@ -13,7 +13,7 @@ public class Core : MonoBehaviour {
  */
 	
 	public DataBase myDataBase;
-	public GUI[] myGUIs;
+	public List<GUI> myGUIs;
 
 /*
  * Internal Variables
@@ -35,6 +35,11 @@ public class Core : MonoBehaviour {
 	 */
 	List<Results> myResults;
 
+	/**
+	 * The card coresponding to the current question
+	 */
+	Card currentCard;
+
 /*
  * DataBase Hooks
  */
@@ -42,8 +47,8 @@ public class Core : MonoBehaviour {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public Binder addXML(string filename){
-		return myDataBase.addXML (filename);
+	public Binder addBinderFromXML(string filename){
+		return myDataBase.addBinderFromXML (filename);
 	}
 
 	/**
@@ -80,9 +85,13 @@ public class Core : MonoBehaviour {
 
 	/**
 	 * Moves the game to the setup screen
+	 * The lead player will use this screen to select which binders to use and add players
 	 */
 	public void setupGame(){
-		
+
+		// Hardcode test XML database
+		addBinderFromXML ("test.xml");
+
 		// add a dummy player
 		addPlayer ("P1");
 		
@@ -90,19 +99,15 @@ public class Core : MonoBehaviour {
 		Binder[] allBinders = getAllBinders();
 		
 		// initialize deck
+		myDeck = new Deck ();
 		myDeck.addManyBinders(allBinders);
 		
 		// use all sets
 		foreach (Binder i in allBinders) {
 			useBinder(i);
 		}
-		
-		// Make a list of possible questions to ask from mySets
-		myCards = new List<Question> ();
-		foreach (Set i in mySets) foreach (Question j in i.myQuestions) {
-			myQuestions.Add(j);
-		}
 
+		// start the game. This should be called by the GUI
 		startGame ();
 	}
 
@@ -119,14 +124,14 @@ public class Core : MonoBehaviour {
 	 * Use a set for this round
 	 */
 	public void useBinder (Binder myBinder){
-		myBinders.add (myBinder);
+		myDeck.addBinder(myBinder);
 	}
 
 	/**
 	 * No longer use a set for this round
 	 */
-	public void disUseBidner(Binder myBinders){
-		myBinders.remove (myBinder);
+	public void disUseBidner(Binder myBinder){
+		myDeck.removeBinder(myBinder);
 	}
 
 	/**
@@ -138,7 +143,7 @@ public class Core : MonoBehaviour {
 		myResults = new List<Results> ();
 
 		// Shuffle questions before asking
-		shuffle (myQuestions);
+		myDeck.shuffleDeck ();
 
 		// Keep asking questions until continueGame conditions are no longer met
 		while (continueGame()) {
@@ -152,7 +157,7 @@ public class Core : MonoBehaviour {
 
 			// Grade all answers to the current question
 			Results tempResults = new Results ();
-			tempResults.originalQuestion = myQuestions [0];
+			tempResults.originalQuestion = currentCard;
 			foreach (Player i in players) {
 				grade (tempResults, i);
 			}
@@ -169,9 +174,6 @@ public class Core : MonoBehaviour {
 			while (playersNotReady()>0) {
 				yield return new WaitForSeconds (0.1f);
 			}
-
-			// Delete current question from question lists
-			myQuestions.Remove (myQuestions [0]);
 		}
 
 		// The round is now over
@@ -215,7 +217,7 @@ public class Core : MonoBehaviour {
 	bool continueGame(){
 		// See if we have any questions left in the list
 		// Later add option for timed countdown
-		return myQuestions.Count>0;
+		return myDeck.cardsLeft()>0;
 	}
 
 	/**
@@ -227,20 +229,10 @@ public class Core : MonoBehaviour {
 			i.lastAnswer = null;
 
 		// Push new question to all screens
+		currentCard=myDeck.drawCard();
 		foreach(GUI i in myGUIs)
-			i.nextQuestion (myQuestions [0]);
+			i.nextQuestion (currentCard);
 	}
-
-	/**
-	 * Randomizes a list
-	 */
-	void shuffle<T>(List<T> myList){
-		for (int i = 0; i < myList.Count; i++) {
-			T temp = myList[i];
-			int randomIndex = Random.Range(i, myList.Count);
-			myList[i] = myList[randomIndex];
-			myList[randomIndex] = temp;
-		}	}
 
 	/**
 	 * Returns how many players have not answered
@@ -292,8 +284,6 @@ public class Core : MonoBehaviour {
 	 */
 	void Awake(){
 
-		// Hardcode test XML database
-		addXML ("test.xml");
 	}
 
 	/**
