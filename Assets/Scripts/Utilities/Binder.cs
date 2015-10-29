@@ -15,6 +15,12 @@ public class Binder {
 	public string nickname;
 
 	/**
+	 * The relative chance of pulling a card from this binder after it is compilled into a deck
+	 * A weight of zero means to include no cards from this binder
+	 */
+	public int weight;
+
+	/**
 	 * An array of all the cards in this binder. The cards in the array can be of any question type (multiple choice, short answer, etc)
 	 */
 	public Card[] myCards;

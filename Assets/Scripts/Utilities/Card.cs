@@ -29,4 +29,9 @@ public class Card {
 	 * ex: For short answer, it would contain a model answer to the question
 	 */
 	public Answer correctAnswer;
+
+	/**
+	 * True if this card should be placed into the deck
+	 */
+	public bool includeCard;
 }

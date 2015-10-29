@@ -18,32 +18,37 @@ public class Deck {
 
 
 	/**
-	 * Function to add an array of binders into the deck
+	 * Function to add an array of cards into the deck
 	 */
-	public void addManyBinders(Binder[] newBinders){
-		foreach (Binder b in newBinders) {
-			addBinder(b);
+	public void addManyCards(Card[] newCards){
+		foreach (Card i in newCards) {
+			addCard(i);
 		}
 	}
 
 	/**
-	 * Function to add cards from a binder into the deck.
+	 * Function to add a card into the deck.
 	 * New cards should go into the drawPile
 	 */
-	public void addBinder(Binder newBinder){
-		foreach (Card i in newBinder.myCards) {
-			drawPile.Add(i);
+	public void addCard(Card newCard){
+		drawPile.Add(newCard);
+	}
+
+	/**
+	 * Function to permanently remove an array of cards from the deck
+	 */
+	public void removeManyCards(Card[] myCards){
+		foreach (Card i in myCards) {
+			removeCard(i);
 		}
 	}
 
 	/**
-	 * Function to remove every card in binder from the deck
+	 * Function to permanently remove a card from the deck
 	 */
-	public void removeBinder(Binder myBinder){
-		foreach (Card i in myBinder.myCards) {
-			drawPile.Remove(i);
-			discardPile.Remove(i);
-		}
+	public void removeCard(Card myCard){
+		drawPile.Remove (myCard);
+		discardPile.Remove (myCard);
 	}
 
 	/**

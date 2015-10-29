@@ -12,12 +12,12 @@ public class Player {
 	/**
 	 * The name of the player (or nickname)
 	 */
-	string playerName;
+	public string playerName;
 
 	/**
 	 * The player's ID. Must be unique to each player and is automatically generated in the constructor
 	 */
-	int playerID;
+	public int playerID;
 
 	/**
 	 * The last created playerID

@@ -47,36 +47,15 @@ public class Core : MonoBehaviour {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public Binder addBinderFromXML(string filename){
-		return myDataBase.addBinderFromXML (filename);
+	public void addBinderFromXML(string filename){
+		myDataBase.addBinderFromXML (filename);
 	}
 
 	/**
 	 * Returns an array containing all loaded binders
 	 */
 	public Binder[] getAllBinders(){
-		return myDataBase.getAllBinders();
-	}
-
-	/** 
-	 * Returns an array containing all question cards from the parent bidner
-	 */
-	public Card[] getAllCards (Binder parent){
-		return myDataBase.getAllCards(parent);
-	}
-
-	/**
-	 * Adds a question to a binder
-	 */
-	public void addCard (Binder parent, Card child){
-		myDataBase.addCard(parent, child);
-	}
-
-	/**
-	 * Deletes a question from a binder
-	 */
-	public void deleteCard (Binder parent, Card child){
-		myDataBase.deleteCard (parent, child);
+		return myDataBase.viewBinders();
 	}
 
 /*
@@ -94,18 +73,12 @@ public class Core : MonoBehaviour {
 
 		// add a dummy player
 		addPlayer ("P1");
+	
+		// define deck generation preferences
+		myDataBase.setMaxNumberOfCards (50);
 		
-		// load sets from database
-		Binder[] allBinders = getAllBinders();
-		
-		// initialize deck
-		myDeck = new Deck ();
-		myDeck.addManyBinders(allBinders);
-		
-		// use all sets
-		foreach (Binder i in allBinders) {
-			useBinder(i);
-		}
+		// generate deck
+		myDeck = myDataBase.generateDeck ();
 
 		// start the game. This should be called by the GUI
 		startGame ();
@@ -118,20 +91,6 @@ public class Core : MonoBehaviour {
 		Player tempPlayer = new Player (name);
 		players.Add (tempPlayer);
 		return tempPlayer;
-	}
-
-	/**
-	 * Use a set for this round
-	 */
-	public void useBinder (Binder myBinder){
-		myDeck.addBinder(myBinder);
-	}
-
-	/**
-	 * No longer use a set for this round
-	 */
-	public void disUseBidner(Binder myBinder){
-		myDeck.removeBinder(myBinder);
 	}
 
 	/**
@@ -163,12 +122,14 @@ public class Core : MonoBehaviour {
 			}
 			myResults.Add (tempResults);
 
+			
 			// Push the results to the GUI to display
-			foreach(Player i in players)
-				i.isReady=false;
-
 			foreach(GUI i in myGUIs)
 				i.displayQuestionResults(tempResults);
+			
+			// flag that players are not ready to go to the next scene
+			foreach(Player i in players)
+				i.isReady=false;
 
 			// Wait for all players to be ready
 			while (playersNotReady()>0) {
@@ -196,8 +157,10 @@ public class Core : MonoBehaviour {
 	/** 
 	 * Tells the Core that the player is ready to start the next question
 	 */
-	public void playerReady (Player myPlayer){
-		
+	public void playerReady (int playerID){
+		foreach (Player i in players)
+			if(i.playerID==playerID) 
+				i.isReady=true;
 	}
 
 	/**
