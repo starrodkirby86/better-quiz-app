@@ -19,4 +19,9 @@ public class Answer {
 	 * ex: 5, 2, 7, Fresno
 	 */
 	public string textAnswer;
+
+	public Answer(string inputAnswer)
+	{
+		textAnswer = inputAnswer;
+	}
 }

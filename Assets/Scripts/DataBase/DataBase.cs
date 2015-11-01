@@ -1,5 +1,6 @@
 ﻿using UnityEngine; // For Random
 using System.Collections.Generic; // For lists
+using System.Xml; // For XML
 
 /**
  * The DataBase stores all cards and binders into XML files as well as parsing XML files into classes
@@ -14,8 +15,27 @@ public class DataBase {
 	/**
 	 * Instructs the database to parse the XML file given by filename and add it to the collection
 	 */
-	public void addBinderFromXML(string filename){
+	public int addBinderFromXML(string filename){
+		Binder newBinder = new Binder (filename); // Declare a new binder to be later added.
 
+		TextAsset xmlFile = Resources.Load (filename) as TextAsset; // We'll see how this works for now :)
+		XmlDocument questionDoc = new XmlDocument ();
+		questionDoc.LoadXml (xmlFile.text);
+
+		XmlNodeList questionNodes = questionDoc.DocumentElement.SelectNodes ("/Flipbook/Card");
+
+		// For each question in the XML file...
+		foreach (XmlNode card in questionNodes) {
+			// Parse and assemble the question
+			Card newCard = new Card(card.SelectSingleNode("Question").InnerText, card.SelectSingleNode ("Answer").InnerText);
+			// Push the question into the binder
+			newBinder.addCard (newCard);
+		}
+
+		// Now we here
+		// Add the set to the collection and return its ID number
+		loadedBinders.Add (newBinder); // Binders full of women
+		return (loadedBinders.Count - 1);
 	}
 
 	/**

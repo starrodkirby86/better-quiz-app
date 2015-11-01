@@ -13,7 +13,7 @@ public class Card {
 	 * This text is parsed from the XML file and is displayed to the user when the question is asked
 	 * ex: How many roots does x^2-x-2 have?
 	 */
-	public string QuestionText;
+	public string questionText;
 
 	/**
 	 * Possible answers
@@ -34,4 +34,37 @@ public class Card {
 	 * True if this card should be placed into the deck
 	 */
 	public bool includeCard;
+
+	/**
+	 * Constructor for a new card (For only supporting text/answer so far
+	 */
+	public Card(string text, string answer) {
+		questionText = text;
+		correctAnswer = new Answer(answer);
+	}
+
+	/**
+	 * Game logic functions
+	 * Brought to you by Johnson & Johnson, a family company (thanks colin!)
+	 */
+
+	/** Check if solution is correct
+	 *  TODO: Add spell error leniency (1 char off for every 4char beyond 1?)
+	 *  TODO: More versatile functionality
+	 */
+	public bool checkCorrectness(string submission) {
+		return (submission == correctAnswer.textAnswer);
+	}
+	
+	public string getQuestion() {
+		//Debug.Log ("XML is SeXML");
+		//Debug.Log (questionText);
+		return questionText;
+	}
+	
+	public string getAnswer() {
+		// For now, return the textual answer
+		// But we need to encompass other answer types too.
+		return correctAnswer.textAnswer;
+	}
 }

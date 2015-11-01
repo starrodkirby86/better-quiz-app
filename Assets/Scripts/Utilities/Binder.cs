@@ -1,6 +1,7 @@
 ﻿/**
  * Utility Class to hold a Binder of Cards. Each binder will correspond to an XML file
  */
+using System.Collections.Generic;
 
 public class Binder {
 
@@ -21,8 +22,22 @@ public class Binder {
 	public int weight;
 
 	/**
-	 * An array of all the cards in this binder. The cards in the array can be of any question type (multiple choice, short answer, etc)
+	 * An array of all the cards in this binder. The cards in the list can be of any question type (multiple choice, short answer, etc)
 	 */
-	public Card[] myCards;
+	public List<Card> myCards;
 
+	/**
+	 * Constructor for binder class with filename.
+	 */
+	public Binder(string name) {
+		filename = name;
+		myCards = new List<Card> ();
+	}
+
+	/**
+	 * Add a card into the binder. This simply inserts a new card node into the list myCards.
+	 */
+	public void addCard(Card submission) {
+		myCards.Add (submission);
+	}
 }
