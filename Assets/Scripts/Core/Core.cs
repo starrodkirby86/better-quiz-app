@@ -85,6 +85,31 @@ public class Core : MonoBehaviour {
 	}
 
 	/**
+	 *  SetupGameDebug
+	 *  This is just to demonstrate the system working with...
+	 * 	-> Multiple binders
+	 * 	-> In the new binder system
+	 */
+	public void setupGameDebug(){
+
+		// Hardcode test XML database
+		addBinderFromXML ("sample.xml");
+		addBinderFromXML ("smashBros.xml");
+
+		// add a dummy player
+		addPlayer ("P1");
+	
+		// define deck generation preferences
+		myDataBase.setMaxNumberOfCards (50);
+		
+		// generate deck
+		myDeck = myDataBase.generateDeck ();
+
+		// start the game. This should be called by the GUI
+		startGame ();
+	}
+
+	/**
 	 * Adds a player to the game
 	 */
 	public Player addPlayer (string name){
