@@ -1,0 +1,61 @@
+<Flipbook>
+  <Card>
+    <Question>
+    Which data type has a time complexity of O(1) for access?
+    A: Array
+    B: Singly-Linked List
+    C: Stack
+    D: Binary Search Tree
+    </Question>
+    <Answer>A</Answer>
+  </Card>
+  <Card>
+    </Question>
+    Which data type does NOT have a time complexity of O(N) for search?
+    A: Singly-Linked List
+    B: Array
+    C: Binary Search Tree
+    D: Stack
+    </Question>
+    <Answer>C</Answer>
+  </Card>
+  <Card>
+    <Question>
+    What is the average time complexity of selection sort?
+    A: O(n)
+    B: O(n log(n))
+    C: O(n+k)
+    D: O(n^2)
+    </Question>
+    <Answer>D</Answer>
+  </Card>
+  <Card>
+    <Question>
+    What is the average time complexity of quick sort?
+    A: O(n)
+    B: O(n log(n))
+    C: O(n+k)
+    D: O(n^2)
+    </Question>
+    <Answer>B</Answer>
+  </Card>
+  <Card>
+    <Question>
+    Which data type has a time complexity of O(1) for deletion?
+    A: Stack
+    B: Doubly-Linked list
+    C: Binary Search Tree
+    D: Array
+    </Question>
+    <Answer>B</Answer>
+  </Card>
+  <Card>
+    <Question>
+    Which sorting algorithm does NOT have a worst case time complexity of O(n^2)?
+    A: Quick Sort
+    B: Selection Sort
+    C: Insertion Sort
+    D: Merge Sort
+    </Question>
+    <Answer>D</Answer>
+  </Card>
