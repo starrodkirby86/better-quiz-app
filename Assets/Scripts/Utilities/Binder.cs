@@ -1,6 +1,7 @@
 ﻿/**
  * Utility Class to hold a Binder of Cards. Each binder will correspond to an XML file
  */
+using UnityEngine;
 using System.Collections.Generic;
 
 public class Binder {
@@ -39,5 +40,17 @@ public class Binder {
 	 */
 	public void addCard(Card submission) {
 		myCards.Add (submission);
+	}
+
+	/**
+	 * Gets a card from the binder. The card is not removed from the binder.
+	 * If the index number is out-of-range, it will draw a random card out instead.
+	 * Alternatively, if the random flag is enabled, it'll draw a random card out instead.
+	 */
+	public Card getCard(int index, bool random) {
+		if(index >= 0 && index < myCards.Count && (!random))
+			return myCards[index];
+		else
+			return myCards[(Random.Range(0,myCards.Count-1))];
 	}
 }

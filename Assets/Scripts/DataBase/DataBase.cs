@@ -58,7 +58,34 @@ public class DataBase {
 
 		/**
 		 * Generate the deck here
+		 * TODO:
+		 * X - Random implementation first.
+		 *   - Sorted implementation based on weights.
+		 *   - ???
+		 *   - PROFIT!
 		 */
+
+		/**
+		 * Doing it randomly is kinky.
+		 * We keep picking cards until the amount of cards in the drawPile
+		 * is that of the numberOfCards in preferences.
+		 */
+		int cardLength = result.cardsLeft();
+		while (cardLength != deckPreferences.numberOfCards) {
+			/**
+			 * Pick a random deck and get a random card from that deck
+			 */
+			int randDeck = (Random.Range (0,loadedBinders.Count));
+			Card newCard = loadedBinders[randDeck].getCard (0,true);
+
+			/**
+			 * Is that card not in the deck yet?
+			 */
+			if(!(result.cardMatch (newCard)))
+				result.addCard (newCard); // Add it in! Else, nothing happens.
+
+			cardLength = result.cardsLeft(); // Update cardLength (We can't directly use results.cardsLeft for some reason
+		}
 
 		result.shuffleDeck ();
 		return result;

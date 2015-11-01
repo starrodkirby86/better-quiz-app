@@ -87,4 +87,17 @@ public class Deck {
 			drawPile [randomIndex] = temp;
 		}
 	}
+
+	/**
+	 * Function to verify if an existing card in drawPile
+	 * matches the input card
+	 */
+	public bool cardMatch(Card inputCard)
+	{
+		for (int i = 0; i < drawPile.Count; i++) {
+			if(drawPile[i] == inputCard)
+				return true;
+		}
+		return false; // Reaching here implies card wasn't found
+	}
 }
