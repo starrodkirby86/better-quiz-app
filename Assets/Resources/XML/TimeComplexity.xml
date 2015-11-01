@@ -10,7 +10,7 @@
     <Answer>A</Answer>
   </Card>
   <Card>
-    </Question>
+    <Question>
     Which data type does NOT have a time complexity of O(N) for search?
     A: Singly-Linked List
     B: Array
