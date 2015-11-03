@@ -68,6 +68,11 @@ public class Core : MonoBehaviour {
 	 */
 	public void setupGame(){
 
+		/**
+		 * Currently the setupGame phase is a hard debug function. But this should be
+		 * a scene switch or something for preferences.
+		 */
+
 		// Hardcode test XML database
 		addBinderFromXML ("sample.xml");
 		addBinderFromXML ("smashBros.xml");
@@ -77,7 +82,7 @@ public class Core : MonoBehaviour {
 		addPlayer ("P1");
 	
 		// define deck generation preferences
-		myDataBase.setMaxNumberOfCards (50);
+		myDataBase.setMaxNumberOfCards (5);
 		
 		// generate deck
 		myDeck = myDataBase.generateDeck ();

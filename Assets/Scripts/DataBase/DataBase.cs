@@ -69,14 +69,16 @@ public class DataBase {
 		 * Doing it randomly is kinky.
 		 * We keep picking cards until the amount of cards in the drawPile
 		 * is that of the numberOfCards in preferences.
+		 * 
+		 * In the future, this code will need to be refactored elsewhere
+		 * depending on the user's preferences in sorting.
 		 */
 		int cardLength = result.cardsLeft();
 		while (cardLength != deckPreferences.numberOfCards) {
 			/**
 			 * Pick a random deck and get a random card from that deck
 			 */
-			int randDeck = (Random.Range (0,loadedBinders.Count));
-			Card newCard = loadedBinders[randDeck].getCard (0,true);
+			Card newCard = loadedBinders[(Random.Range (0,loadedBinders.Count))].getCard (0,true);
 
 			/**
 			 * Is that card not in the deck yet?
