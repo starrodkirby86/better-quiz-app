@@ -78,7 +78,7 @@ public class DataBase {
 			/**
 			 * Pick a random deck and get a random card from that deck
 			 */
-			Card newCard = loadedBinders[(Random.Range (0,loadedBinders.Count))].getCard (0,true);
+			Card newCard = loadedBinders[(Random.Range (0,loadedBinders.Count))].getCard (-1);
 
 			/**
 			 * Is that card not in the deck yet?

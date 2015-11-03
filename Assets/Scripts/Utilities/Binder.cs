@@ -47,7 +47,7 @@ public class Binder {
 	 * If the index number is out-of-range, it will draw a random card out instead.
 	 * Alternatively, if the random flag is enabled, it'll draw a random card out instead.
 	 */
-	public Card getCard(int index, bool random) {
+	public Card getCard(int index) {
 		if(index >= 0 && index < myCards.Count && (!random))
 			return myCards[index];
 		else
