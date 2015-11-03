@@ -46,8 +46,10 @@ public class GUI {
 	/** 
 	 * Tells the GUI to load a scene
 	 * ex: Title, AskQuestion, GameOver
+	 * The return Scene is the next scene to go to
+	 * 		- Very important for the GameOver scene, currently all other scenes only has one next scene which can be hardcoded into the Core
 	 */
-	public void loadScene (Scene nextScene){
+	public Scene loadScene (Scene nextScene){
 		
 	}
 
