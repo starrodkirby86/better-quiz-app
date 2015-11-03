@@ -46,9 +46,10 @@ public class GUI {
 	/** 
 	 * Tells the GUI to load a scene
 	 * ex: Title, AskQuestion, GameOver
+	 * The return Scene is the next scene to go to
 	 */
-	public void loadScene (Scene nextScene){
-		
+	public Scene loadScene (Scene nextScene){
+		return Scene.Title; // Placeholder
 	}
 
 }

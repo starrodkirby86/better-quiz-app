@@ -68,6 +68,10 @@ public class Core : MonoBehaviour {
 	 */
 	public void setupGame(){
 
+		// This function doesn't work yet, but it should move the GUI to the setup scene
+		foreach(GUI i in myGUIs)
+			i.loadScene(Scene.NewGame);
+
 		/**
 		 * Currently the setupGame phase is a hard debug function. But this should be
 		 * a scene switch or something for preferences.
@@ -260,8 +264,7 @@ public class Core : MonoBehaviour {
 	 * Executes when game starts
 	 */
 	void Start () {
-		// moves from the title screen to the setup round screen // after 5 seconds
-		// yield return new WaitForSeconds (5);
+		// moves from the title screen to the setup round screen
 		setupGame ();
 	}
 	
