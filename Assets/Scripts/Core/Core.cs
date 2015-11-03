@@ -70,7 +70,7 @@ public class Core : MonoBehaviour {
 
 		// This function doesn't work yet, but it should move the GUI to the setup scene
 		foreach(GUI i in myGUIs)
-			i.loadScene(Scene);
+			i.loadScene(Scene.NewGame);
 
 		/**
 		 * Currently the setupGame phase is a hard debug function. But this should be
