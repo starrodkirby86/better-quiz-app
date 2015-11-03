@@ -47,16 +47,17 @@ public class DataBase {
 		return true; // Pretend everything saved
 	}
 
-/**
- * Functions to configure the deck generation
- */
-	/**
+    /**
+     * Functions to configure the deck generation
+     */
+    /**
 	 * Compile the deck
 	 */
-	public Deck generateDeck(){
-		Deck result = new Deck ();
+    public Deck generateDeck()
+    {
+        Deck result = new Deck();
 
-		/**
+        /**
 		 * Generate the deck here
 		 * TODO:
 		 * X - Random implementation first.
@@ -65,7 +66,7 @@ public class DataBase {
 		 *   - PROFIT!
 		 */
 
-		/**
+        /**
 		 * Doing it randomly is kinky.
 		 * We keep picking cards until the amount of cards in the drawPile
 		 * is that of the numberOfCards in preferences.
@@ -73,24 +74,33 @@ public class DataBase {
 		 * In the future, this code will need to be refactored elsewhere
 		 * depending on the user's preferences in sorting.
 		 */
-		int cardLength = result.cardsLeft();
-		while (cardLength != deckPreferences.numberOfCards) {
-			/**
-			 * Pick a random deck and get a random card from that deck
-			 */
-			Card newCard = loadedBinders[(Random.Range (0,loadedBinders.Count))].getCard (0,true);
+        int cardLength = result.cardsLeft();
 
-			/**
-			 * Is that card not in the deck yet?
-			 */
-			if(!(result.cardMatch (newCard)))
-				result.addCard (newCard); // Add it in! Else, nothing happens.
+        if (deckPreferences.numberOfCards > cardLength)
+        {
+            Debug.Log("More cards requested than available!");
+        }
+        else
+        {
+            while (cardLength != deckPreferences.numberOfCards)
+            {
+                /**
+                 * Pick a random deck and get a random card from that deck
+                 */
+                Card newCard = loadedBinders[(Random.Range(0, loadedBinders.Count))].getCard(0, true);
 
-			cardLength = result.cardsLeft(); // Update cardLength (We can't directly use results.cardsLeft for some reason
-		}
+                /**
+                 * Is that card not in the deck yet?
+                 */
+                if (!(result.cardMatch(newCard)))
+                    result.addCard(newCard); // Add it in! Else, nothing happens.
+            }
+            cardLength = result.cardsLeft(); // Update cardLength (We can't directly use results.cardsLeft for some reason
+            result.shuffleDeck();
+        }
 
-		result.shuffleDeck ();
-		return result;
+
+        return result;
 	}
 
 	/**
