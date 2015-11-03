@@ -73,8 +73,7 @@ public class DataBase {
 		 * In the future, this code will need to be refactored elsewhere
 		 * depending on the user's preferences in sorting.
 		 */
-		int cardLength = result.cardsLeft();
-		while (cardLength != deckPreferences.numberOfCards) {
+		while (result.cardsLeft() != deckPreferences.numberOfCards) {
 			/**
 			 * Pick a random deck and get a random card from that deck
 			 */
@@ -85,8 +84,6 @@ public class DataBase {
 			 */
 			if(!(result.cardMatch (newCard)))
 				result.addCard (newCard); // Add it in! Else, nothing happens.
-
-			cardLength = result.cardsLeft(); // Update cardLength (We can't directly use results.cardsLeft for some reason
 		}
 
 		result.shuffleDeck ();
