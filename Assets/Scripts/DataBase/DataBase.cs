@@ -17,8 +17,8 @@ public class DataBase {
 	 */
 	public int addBinderFromXML(string filename){
 		Binder newBinder = new Binder (filename); // Declare a new binder to be later added.
-
-		TextAsset xmlFile = Resources.Load (filename) as TextAsset; // We'll see how this works for now :)
+		
+		TextAsset xmlFile = Resources.Load ("XML/" + filename) as TextAsset; // We'll see how this works for now :)
 		XmlDocument questionDoc = new XmlDocument ();
 		questionDoc.LoadXml (xmlFile.text);
 
@@ -73,6 +73,9 @@ public class DataBase {
 		 * In the future, this code will need to be refactored elsewhere
 		 * depending on the user's preferences in sorting.
 		 */
+
+		Debug.Log ("Starting deck generation...");
+
 		while (result.cardsLeft() != deckPreferences.numberOfCards) {
 			/**
 			 * Pick a random deck and get a random card from that deck
@@ -84,6 +87,8 @@ public class DataBase {
 			 */
 			if(!(result.cardMatch (newCard)))
 				result.addCard (newCard); // Add it in! Else, nothing happens.
+
+			Debug.Log (result.cardsLeft ());
 		}
 
 		result.shuffleDeck ();

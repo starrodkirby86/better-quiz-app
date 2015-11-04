@@ -68,19 +68,28 @@ public class Core : MonoBehaviour {
 	 */
 	public void setupGame(){
 
+		/**
 		// This function doesn't work yet, but it should move the GUI to the setup scene
 		foreach(GUI i in myGUIs)
 			i.loadScene(Scene.NewGame);
+		*/
 
 		/**
 		 * Currently the setupGame phase is a hard debug function. But this should be
 		 * a scene switch or something for preferences.
 		 */
 
+		/*
+		 * I think we need to initialize a database and GUI or something.
+		 */
+		myDataBase = new DataBase ();
+
+		Debug.Log ("Setting up game...");
+
 		// Hardcode test XML database
-		addBinderFromXML ("sample.xml");
-		addBinderFromXML ("smashBros.xml");
-		addBinderFromXML ("TimeComplexity.xml");
+		addBinderFromXML ("sample");
+		addBinderFromXML ("smashBros");
+		addBinderFromXML ("TimeComplexity");
 
 		// add a dummy player
 		addPlayer ("P1");
@@ -92,6 +101,8 @@ public class Core : MonoBehaviour {
 		myDeck = myDataBase.generateDeck ();
 
 		// start the game. This should be called by the GUI
+		Debug.Log ("Get ready.");
+
 		startGame ();
 	}
 
@@ -108,6 +119,8 @@ public class Core : MonoBehaviour {
 	 * Starts a round with the current settings
 	 */
 	public IEnumerator startGame (){
+
+		Debug.Log ("Start game called!");
 
 		// Clear old results
 		myResults = new List<Results> ();
@@ -254,10 +267,18 @@ public class Core : MonoBehaviour {
 	}
 
 	/**
+	* This is a dummy wait function.
+	*/
+	IEnumerator dontWorryAboutThis() {
+		print (Time.time);
+		yield return new WaitForSeconds (5);
+		print (Time.time);
+	}
+	/**
 	 * Preps the Core for executing
 	 */
 	void Awake(){
-
+		DontDestroyOnLoad (gameObject); // This is to keep the game core loaded for the other game scenes.
 	}
 
 	/**
@@ -265,6 +286,9 @@ public class Core : MonoBehaviour {
 	 */
 	void Start () {
 		// moves from the title screen to the setup round screen
+		// I will kill dontWorryAboutThis soon, I Just need this for sanity
+		// and flow
+		StartCoroutine (dontWorryAboutThis ());
 		setupGame ();
 	}
 	
@@ -272,4 +296,5 @@ public class Core : MonoBehaviour {
 	void Update () {
 	
 	}
+
 }
