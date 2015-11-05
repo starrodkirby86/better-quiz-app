@@ -83,6 +83,8 @@ public class Core : MonoBehaviour {
 		 * I think we need to initialize a database and GUI or something.
 		 */
 		myDataBase = new DataBase ();
+		myGUIs = new List<GUI> ();
+		myGUIs.Add (new GUI ());
 
 		Debug.Log ("Setting up game...");
 
@@ -103,7 +105,7 @@ public class Core : MonoBehaviour {
 		// start the game. This should be called by the GUI
 		Debug.Log ("Get ready.");
 
-		startGame ();
+		StartCoroutine(startGame ());
 	}
 
 	/**
@@ -211,12 +213,16 @@ public class Core : MonoBehaviour {
 	 * Steps to ask a question
 	 */
 	void askQuestion(){
+
+		Debug.Log ("Asking...");
+
 		// Clear old answers
 		foreach (Player i in players)
 			i.lastAnswer = null;
 
 		// Push new question to all screens
 		currentCard=myDeck.drawCard();
+
 		foreach(GUI i in myGUIs)
 			i.nextQuestion (currentCard);
 	}
@@ -278,7 +284,7 @@ public class Core : MonoBehaviour {
 	 * Preps the Core for executing
 	 */
 	void Awake(){
-		DontDestroyOnLoad (gameObject); // This is to keep the game core loaded for the other game scenes.
+		DontDestroyOnLoad (transform.gameObject); // This is to keep the game core loaded for the other game scenes.
 	}
 
 	/**

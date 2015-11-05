@@ -1,9 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+
 
 /**
  * The GUI is responsible for all user interaction. It displays everything to the user (duh!) as well as grabbing user input]
  */
 public class GUI {
+
+/*
+ *  Internal Bleeding
+ */
+	/**
+	 * Used to assert that the level is loaded so the game objects would actually be found.
+	 */
+	bool isLevelLoaded = false;
+
 /*
  * Core Hooks
  */
@@ -15,13 +28,27 @@ public class GUI {
 	 * The next GUI task will occur when all the players have answered the question. The Core will then calculate the results and call displayQuestionResults
 	 */
 	public void nextQuestion (Card nextQuestion){
-		
+
+		// Keep note of levels so that this function does not have any problems
+		// repeatedly loading something unnecessarily or something like that. Grunt.
+		loadScene (Scene.AskQuestion);
+
+		// We hope that here now we can actually get things done.
+		GameObject cardText = GameObject.Find ("viewCardText");
+		//Debug.Log (cardText.GetComponent<Text> ().text);
+		if (cardText != null) {
+			Text questionText = cardText.GetComponent <Text> ();
+			questionText.text = nextQuestion.questionText;
+		}
+
+		Debug.Log ("Look mom, I did it!");
+
 	}
 
 	/**
 	 * Tells the GUI what the current question's results are and to display them on the screen.
 	 * The results will contain each player's question, answer, and correctness of the answer.
-	 * The GUI will first display each player's answer along with the correct answer.
+	 * The GUI will first display each player's answer along with the correct answeyth vhur.
 	 * A dramatic pause between the player's answer and correct answer can be added.
 	 * The GUI should signify which questions are correct and which ones aren't.
 	 * 
@@ -43,12 +70,28 @@ public class GUI {
 		
 	}
 
+	/**
+	 * On level was loaded...
+	 */
+	void OnLevelWasLoaded(int level) {
+		isLevelLoaded = true;
+		Debug.Log (level);
+		Debug.Log ("That level was loaded. ;)");
+	}
+
 	/** 
 	 * Tells the GUI to load a scene
 	 * ex: Title, AskQuestion, GameOver
 	 * The return Scene is the next scene to go to
+	 * Asserts that scene is loaded.
 	 */
 	public Scene loadScene (Scene nextScene){
+		Application.LoadLevel (nextScene.ToString ());
+		int obama = 0;
+		while (!isLevelLoaded && (obama < 5000) ) {
+			Debug.Log ("Crap.");
+			obama++;
+		}
 		return Scene.Title; // Placeholder
 	}
 
