@@ -273,6 +273,15 @@ public class Core : MonoBehaviour {
 	}
 
 	/**
+	 * Assert level was true.
+	 */
+	public void makeGUILevelTrue()
+	{
+		foreach(GUI i in myGUIs)
+			i.levelIsLoaded ();
+	}
+
+	/**
 	* This is a dummy wait function.
 	*/
 	IEnumerator dontWorryAboutThis() {

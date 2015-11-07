@@ -71,12 +71,11 @@ public class GUI {
 	}
 
 	/**
-	 * On level was loaded...
+	 * assert level as loaded
 	 */
-	void OnLevelWasLoaded(int level) {
+	public void levelIsLoaded()
+	{
 		isLevelLoaded = true;
-		Debug.Log (level);
-		Debug.Log ("That level was loaded. ;)");
 	}
 
 	/** 
@@ -88,10 +87,12 @@ public class GUI {
 	public Scene loadScene (Scene nextScene){
 		Application.LoadLevel (nextScene.ToString ());
 		int obama = 0;
-		while (!isLevelLoaded && (obama < 5000) ) {
+		while (!isLevelLoaded && (obama < 50) ) {
 			Debug.Log ("Crap.");
 			obama++;
 		}
+		if (isLevelLoaded)
+			Debug.Log ("Wow!");
 		return Scene.Title; // Placeholder
 	}
 
