@@ -6,7 +6,7 @@ using UnityEngine;					// For MonoBehaviour
 using System.Collections.Generic; 	// For Lists
 
 public partial class Core : MonoBehaviour {
-
+	 
 /*
  * References to Objects
  */
