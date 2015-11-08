@@ -4,12 +4,13 @@ using System.Collections.Generic; // For lists
 /** 
  * Utility Class used to hold all the cards for this game
  */
+[System.Serializable]
 public class Deck {
 	
 	/**
 	 * An array of cards that have yet to be drawn
 	 */
-	List<Card> drawPile = new List<Card>();
+	public List<Card> drawPile = new List<Card>();
 	
 	/**
 	 * An array of cards that have already been drawn

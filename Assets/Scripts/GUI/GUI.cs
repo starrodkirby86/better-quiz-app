@@ -7,6 +7,8 @@ using System.Collections.Generic;
 /**
  * The GUI is responsible for all user interaction. It displays everything to the user (duh!) as well as grabbing user input]
  */
+
+[System.Serializable]
 public class GUI {
 
 /*
@@ -25,15 +27,8 @@ public class GUI {
 		// repeatedly loading something unnecessarily or something like that. Grunt.
 		loadScene (Scene.AskQuestion);
 
-		// We hope that here now we can actually get things done.
-		GameObject cardText = GameObject.Find ("viewCardText");
-		//Debug.Log (cardText.GetComponent<Text> ().text);
-		if (cardText != null) {
-			Text questionText = cardText.GetComponent <Text> ();
-			questionText.text = nextQuestion.questionText;
-		}
+		// Since the loadScene() function is async, the DisplayAgent will have to setup the GUI
 
-		Debug.Log ("Look mom, I did it!");
 
 	}
 
@@ -48,9 +43,33 @@ public class GUI {
 	 * When the button is pressed, the GUI will report to the Core.
 	 * Once all players are ready to move on, the Core will call nextQuestion for the GUI to ask the next question.
 	 * If there are no more questions, the Core will call displayFinalResults instead
+	 * 
+	 * Just a note: This uses the viewNextButton, which currently has pretty bad ways of hiding
+	 * the button. We may need to refactor this code in the future to efficiently and more elegantly
+	 * hide and make the button appear.
 	 */
 	public void displayQuestionResults (Results theResults){
-		
+		GameObject myViewGradeResult = GameObject.Find ("viewGradeResult");
+		GameObject myViewGradeText = GameObject.Find ("viewGradeText");
+		GameObject myViewNextButton = GameObject.Find ("viewNextButton");
+
+		//Image myViewGradeResultImage = myViewGradeResult.GetComponents<Image> ();
+		Text myViewGradeTextComponent = myViewGradeText.GetComponent<Text> ();
+
+		// Update the contents depending on whether you got it right or not
+		if (theResults.isCorrect [0]) {
+			myViewGradeTextComponent.text = "Hey, " + theResults.players [0].playerName + ", you got this correct!";
+			myViewGradeTextComponent.color = Color.green;
+		} else {
+			myViewGradeTextComponent.text = theResults.players [0].playerName + " got this wrong. You suck."; 
+			myViewGradeTextComponent.color = Color.red;
+		}
+		// Make things appear.
+		// TODO: REFACTORING, I CALL DIBS, HANDS OFF NICK -- Watson
+		myViewGradeTextComponent.enabled = true;
+		(myViewNextButton.GetComponent<Image> ()).enabled = true;
+		((GameObject.Find ("viewNextButtonText")).GetComponent<Text>()).enabled = true;
+	
 	}
 
 	/**
@@ -62,30 +81,16 @@ public class GUI {
 		
 	}
 
-	/**
-	 * assert level as loaded
-	 */
-	public void levelIsLoaded()
-	{
-		isLevelLoaded = true;
-	}
-
 	/** 
 	 * Tells the GUI to load a scene
 	 * ex: Title, AskQuestion, GameOver
 	 * The return Scene is the next scene to go to
 	 * Asserts that scene is loaded.
 	 */
-	public Scene loadScene (Scene nextScene){
-		Application.LoadLevel (nextScene.ToString ());
-		int obama = 0;
-		while (!isLevelLoaded && (obama < 50) ) {
-			Debug.Log ("Crap.");
-			obama++;
-		}
-		if (isLevelLoaded)
-			Debug.Log ("Wow!");
-		return Scene.Title; // Placeholder
+	public void loadScene (Scene nextScene){
+		Debug.Log ("LOADING " + nextScene.ToString ());
+//		Application.LoadLevel (nextScene.ToString ());
+		Application.LoadLevelAsync (nextScene.ToString());
 	}
 
 }

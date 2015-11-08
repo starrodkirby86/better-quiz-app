@@ -1,6 +1,8 @@
 ﻿/**
  * A class for passing the user's answer to the question from the GUI to the Core
  */
+
+[System.Serializable]
 public class Answer {
 	/**
 	 * The type of question being answered
@@ -20,8 +22,7 @@ public class Answer {
 	 */
 	public string textAnswer;
 
-	public Answer(string inputAnswer)
-	{
+	public Answer(string inputAnswer){
 		textAnswer = inputAnswer;
 	}
 }
