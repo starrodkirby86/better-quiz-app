@@ -102,10 +102,8 @@ public class Core : MonoBehaviour {
 		// generate deck
 		myDeck = myDataBase.generateDeck ();
 
-		// start the game. This should be called by the GUI
-		Debug.Log ("Get ready.");
-
-		StartCoroutine(startGame ());
+		// shuffle questions
+		myDeck.shuffleDeck ();
 	}
 
 	/**
@@ -120,54 +118,74 @@ public class Core : MonoBehaviour {
 	/**
 	 * Starts a round with the current settings
 	 */
-	public IEnumerator startGame (){
+	public void startRound (){
 
-		Debug.Log ("Start game called!");
+		Debug.Log ("Start round called!");
 
 		// Clear old results
 		myResults = new List<Results> ();
 
-		// Shuffle questions before asking
-		myDeck.shuffleDeck ();
+		// Tells the GUIs to push the Question Card to the screen
+		// The GUIs will operate asyncrounously and return before the player see the question because of how loadScene() operates
+		askQuestion ();
 
-		// Keep asking questions until continueGame conditions are no longer met
-		while (continueGame()) {
-			askQuestion ();
-		
+		// Once a player answers the question, the DisplayAgent will call playerAnswer to return the results
+	}
 
-			// Wait for all players to answer
-			while (playersLeftToAnswer()>0) {
-				yield return new WaitForSeconds (0.1f);
-			}
+	/**
+	 * DisplayAgent will call this function to pass the player's answer to the core. Once all the players have answered, the Core will call grade()
+	 */
+	public void playerAnswer(int playerID, Answer playerAnswer){
+		// Store player's answer
+		if (players.Count () < playerID)
+			players [playerID].lastAnswer = playerAnswer;
+		else
+			DebugPlayerIndex (playerID);
 
-			// Grade all answers to the current question
-			Results tempResults = new Results ();
-			tempResults.originalQuestion = currentCard;
-			foreach (Player i in players) {
-				grade (tempResults, i);
-			}
-			myResults.Add (tempResults);
+		// Move on if all players have answered
+		if (playersLeftToAnswer () == 0)
+			// Grade all players
+			gradeAllPlayers ();
+	}
 
-			
-			// Push the results to the GUI to display
-			foreach(GUI i in myGUIs)
-				i.displayQuestionResults(tempResults);
-			
-			// flag that players are not ready to go to the next scene
-			foreach(Player i in players)
-				i.isReady=false;
-
-			// Wait for all players to be ready
-			while (playersNotReady()>0) {
-				yield return new WaitForSeconds (0.1f);
-			}
+	/**
+	 * The Core calls this function to grade all the players' answers to the last question
+	 * It returns a Results object containing the original question, each players' answer and their correctness
+	 * When grading has completed, it will push the results to the GUIs
+	 */
+	public void gradeAllPlayers(){
+		// Grade all answers to the current question
+		Results tempResults = new Results ();
+		tempResults.originalQuestion = currentCard;
+		foreach (Player i in players) {
+			grade (tempResults, i);
 		}
 
-		// The round is now over
-		// Push final resutls to GUI
-		foreach (GUI i in myGUIs)
-			i.displayFinalResults (myResults);
+		// Store the results
+		myResults.Add(tempResults);
+
+		// Display the question results on the screen
 	}
+
+		
+//		// Push the results to the GUI to display
+//		foreach(GUI i in myGUIs)
+//			i.displayQuestionResults(tempResults);
+//		
+//		// flag that players are not ready to go to the next scene
+//		foreach(Player i in players)
+//			i.isReady=false;
+//
+//		// Wait for all players to be ready
+//		while (playersNotReady()>0) {
+//			yield return new WaitForSeconds (0.1f);
+//		}
+//
+//		// The round is now over
+//		// Push final resutls to GUI
+//		foreach (GUI i in myGUIs)
+//			i.displayFinalResults (myResults);
+//	}
 
 /**
  * Main Loop Hooks
@@ -305,6 +323,7 @@ public class Core : MonoBehaviour {
 		// and flow
 		StartCoroutine (dontWorryAboutThis ());
 		setupGame ();
+		startRound ();
 	}
 	
 	// Update is called once per frame
@@ -312,4 +331,15 @@ public class Core : MonoBehaviour {
 	
 	}
 
+ /*
+  * Debug Functions
+  */
+	
+	/**
+	 * This function displays an error when the player's index is out of range
+	 */
+	void DebugPlayerIndex(int playerID){
+		Debug.Log ("Error: Player " + playerID + " does not exist\nOnly "+players.Count"+ people are playing");
+	}
+		
 }
