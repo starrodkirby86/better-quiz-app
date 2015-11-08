@@ -23,6 +23,7 @@ public class SetupAgent : MonoBehaviour {
 		loadCache ();
 		
 		// Initialize sliders with the last used values
+		numberOfCards.text = myCore.myDataBase.deckPreferences.numberOfCards.ToString();
 	}
 	
 	
