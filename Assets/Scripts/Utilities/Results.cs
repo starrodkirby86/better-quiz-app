@@ -3,6 +3,8 @@
 /**
  * Utility Class to hold the results from a single question
  */
+
+[System.Serializable]
 public class Results {
 
 	/**

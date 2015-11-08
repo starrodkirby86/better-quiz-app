@@ -7,6 +7,8 @@ using System.Collections.Generic;
 /**
  * The GUI is responsible for all user interaction. It displays everything to the user (duh!) as well as grabbing user input]
  */
+
+[System.Serializable]
 public class GUI {
 
 /*
