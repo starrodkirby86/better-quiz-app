@@ -43,7 +43,7 @@ public partial class Core : MonoBehaviour {
 	 * The card coresponding to the current question
 	 * It is populated by startRound()
 	 */
-	Card currentCard;
+	public Card currentCard;
 
 	/**
 	 * The results of the current question

@@ -1,4 +1,5 @@
-﻿/*
+
+/*
  * The DisplayAgent is responsible for interacting with the user by:
  * 		- Disecte the Card and display the QuestionText and possible answers
  * 		- Processing the user input and calling the appropriate function in the Core to progress it to the next state
@@ -8,6 +9,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class DisplayAgent : MonoBehaviour {
@@ -15,6 +17,7 @@ public class DisplayAgent : MonoBehaviour {
 	/**
 	 * Called every time the Scene was loaded
 	 * Note: Only triggers on Application.LoadLevel()
+	 * When the Ask Question scene first loads, this should execute.
 	 */
 	void OnLevelWasLoaded(int level) {
 		loadCache ();
@@ -24,6 +27,19 @@ public class DisplayAgent : MonoBehaviour {
 			Debug.Log ("No Core.... :(");
 		Debug.Log (level);
 		Debug.Log ("That level was loaded. ;)");
+		editDisplayText();
+	}
+
+
+	/**
+	 * Takes the current card of the core (drawn
+	 * from the deck), and edits the question text
+	 * to reflect this.
+	 */
+	void editDisplayText()
+	{
+		Text myText = (GameObject.Find ("viewCardText")).GetComponent<Text> ();
+		myText.text = myCore.currentCard.questionText;
 	}
 
 	// Cache the GameCore to improve performance
@@ -40,8 +56,7 @@ public class DisplayAgent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Grab the Game Objects
-		loadCache ();	
+
 	}
 	
 	// Update is called once per frame
