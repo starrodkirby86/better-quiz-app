@@ -37,8 +37,16 @@ public class Core : MonoBehaviour {
 
 	/**
 	 * The card coresponding to the current question
+	 * It is populated by startRound()
 	 */
 	Card currentCard;
+
+	/**
+	 * The results of the current question
+	 * It is populated by gradeAllPlayers()
+	 * It is stored into myResults by endRound()
+	 */
+	Results currentResults;
 
 /*
  * DataBase Hooks
@@ -154,38 +162,71 @@ public class Core : MonoBehaviour {
 	 * When grading has completed, it will push the results to the GUIs
 	 */
 	public void gradeAllPlayers(){
+		// Clear old result data
+		currentResults = new Results ();
+
 		// Grade all answers to the current question
-		Results tempResults = new Results ();
-		tempResults.originalQuestion = currentCard;
+		currentResults.originalQuestion = currentCard;
 		foreach (Player i in players) {
-			grade (tempResults, i);
+			grade (currentResults, i);
 		}
 
-		// Store the results
-		myResults.Add(tempResults);
+		// Display the round's results on the screen
+		displayQuestionResults (currentResults);
 
-		// Display the question results on the screen
+		// Flag that players are not ready to go to the next question
+		makePlayersNotReady ();
+
+		// As players hit the button to advance to the next scene, the DisplayAgent will call playerReady()
 	}
 
-		
-//		// Push the results to the GUI to display
-//		foreach(GUI i in myGUIs)
-//			i.displayQuestionResults(tempResults);
-//		
-//		// flag that players are not ready to go to the next scene
-//		foreach(Player i in players)
-//			i.isReady=false;
-//
-//		// Wait for all players to be ready
-//		while (playersNotReady()>0) {
-//			yield return new WaitForSeconds (0.1f);
-//		}
-//
-//		// The round is now over
-//		// Push final resutls to GUI
-//		foreach (GUI i in myGUIs)
-//			i.displayFinalResults (myResults);
-//	}
+	/**
+	 * The DisplayAgent will call this function to signify that the player is ready to move onto the next question
+	 * After all players are ready, the Core will call endRound()
+	 */
+	void playerReady(int playerID){
+		// Store player's answer
+		if (players.Count () < playerID)
+			players [playerID].isReady = false;
+		else
+			DebugPlayerIndex (playerID);
+
+		// Move on if all players are ready
+		if (playersNotReady == 0)
+			endRound ();
+	}
+
+	/**
+	 * The Core calls this function to end the round
+	 * This function will clean up all the temporary data from the round
+	 * 		- currentResults
+	 * This function will return by either calling startRound() or endGame()
+	 */
+	void endRound(){
+		// Store this round's results
+		myResults.Add (currentResults);
+
+		// If we are good to ask another question, start another round
+		if (continueGame ())
+			startRound ();
+
+		// Else, end the game
+		else
+			endGame ();
+	}
+	
+	/**
+	 * The Core calls this function when the game is over
+	 * It will display the final results to the player and ask it to go to the
+	 * 		- The Title Screen (keep current settings)
+	 * 		- The Setup Screen (keep current settings)
+	 * 		- Start another round (regenerate the deck with the same settings)
+	 */
+	public void endGame (){
+		displayFinalResults ();
+
+		// The DisplayAgent will decide which state to go to next based on user input
+	}
 
 /**
  * Main Loop Hooks
@@ -205,13 +246,6 @@ public class Core : MonoBehaviour {
 		foreach (Player i in players)
 			if(i.playerID==playerID) 
 				i.isReady=true;
-	}
-
-	/**
-	 * Ends the game and returns to the title screen
-	 */
-	public void endGame (){
-		
 	}
 
 /*
@@ -243,6 +277,30 @@ public class Core : MonoBehaviour {
 
 		foreach(GUI i in myGUIs)
 			i.nextQuestion (currentCard);
+	}
+
+	/**
+	 * Display the round's results on each GUI
+	 */
+	void displayQuestionResults(Results roundResults){
+		foreach (GUI i in myGUIs)
+			i.displayQuestionResults (roundResults);
+	}
+
+	/**
+	 * Display the final results on each GUI
+	 */
+	void displayFinalResults(finalResults){
+		foreach (GUI i in myGUIs)
+			i.displayFinalResults (finalResults);
+	}
+
+	/**
+	 * Flag each player as not ready to go to the next question
+	 */
+	void makePlayersNotReady(){
+		foreach (Player i in players)
+			i.isReady = false;
 	}
 
 	/**
