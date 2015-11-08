@@ -45,7 +45,7 @@ public partial class Core : MonoBehaviour{
 	/**
 	 * Loads the scene on each GUI
 	 */
-	void loadScene(Scene targetScene){
+	public void loadScene(Scene targetScene){
 		foreach (GUI i in myGUIs)
 			i.loadScene (targetScene);
 	}

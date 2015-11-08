@@ -38,7 +38,7 @@
  * 			- Core should initialize the settings with the same settings as the last game
  * 		- Button to quit (return Scene.Title when pressed)
  */
-public enum Scene {Title, NewGame, AskQuestion, QuestionResults, GameOver};
+public enum Scene {Title, Options, NewGame, AskQuestion, QuestionResults, GameOver};
 
 /**
  * An enumerated type to differentiate between different Question Types
