@@ -10,14 +10,6 @@ using System.Collections.Generic;
 public class GUI {
 
 /*
- *  Internal Bleeding
- */
-	/**
-	 * Used to assert that the level is loaded so the game objects would actually be found.
-	 */
-	bool isLevelLoaded = false;
-
-/*
  * Core Hooks
  */
 

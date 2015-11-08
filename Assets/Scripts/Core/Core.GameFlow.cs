@@ -48,6 +48,9 @@ public partial class Core : MonoBehaviour{
 		
 		// shuffle questions
 		myDeck.shuffleDeck ();
+
+		// Ask the first question
+		startRound ();
 	}
 
 	/**
