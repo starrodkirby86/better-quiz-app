@@ -32,7 +32,7 @@ public partial class Core : MonoBehaviour{
 		addBinderFromXML ("doesWeebStuffWorkOnHere");
 
 		// add a dummy player
-		addPlayer ("P1");
+		addPlayer ("P1"); 
 	
 		// define deck generation preferences
 		myDataBase.setMaxNumberOfCards (5);
