@@ -15,7 +15,7 @@ public partial class Core : MonoBehaviour{
 	public void setupGame(){
 
 		// Tell each GUI to go to the NewGame Scene
-		loadScene (Scene.NewGame);
+		// loadScene (Scene.NewGame);
 
 		/**
 		 * The reset of this function will preset each preference to some initial values for the user

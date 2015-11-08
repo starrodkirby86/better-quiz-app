@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class DisplayAgent : MonoBehaviour {
 	
 	/**
-	 * On level was loaded...
+	 * When the Ask Question scene first loads, this should execute.
 	 */
 	void OnLevelWasLoaded(int level) {
 		loadCache ();
@@ -14,6 +15,19 @@ public class DisplayAgent : MonoBehaviour {
 			Debug.Log ("No Core.... :(");
 		Debug.Log (level);
 		Debug.Log ("That level was loaded. ;)");
+		editDisplayText();
+	}
+
+
+	/**
+	 * Takes the current card of the core (drawn
+	 * from the deck), and edits the question text
+	 * to reflect this.
+	 */
+	void editDisplayText()
+	{
+		Text myText = (GameObject.Find ("viewCardText")).GetComponent<Text> ();
+		myText.text = myCore.currentCard.questionText;
 	}
 
 	// Cache the GameCore to improve performance
@@ -29,7 +43,6 @@ public class DisplayAgent : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame

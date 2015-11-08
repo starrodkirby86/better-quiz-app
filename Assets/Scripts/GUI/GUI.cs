@@ -62,6 +62,7 @@ public class GUI {
 	 * Asserts that scene is loaded.
 	 */
 	public void loadScene (Scene nextScene){
+		Debug.Log ("LOADING" + nextScene.ToString ());
 		Application.LoadLevel (nextScene.ToString ());
 	}
 
