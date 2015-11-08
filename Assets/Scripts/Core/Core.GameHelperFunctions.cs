@@ -63,9 +63,20 @@ public partial class Core : MonoBehaviour{
 		Debug.Log (myResults.players.Count);
 		// Add player
 		myResults.players.Add (myPlayer);
-		
+
+		Debug.Log (myResults.players.Count);
+
+		if (myPlayer == null)
+			Debug.Log ("Don't show me... >_<");
+
 		// Add player's answer
 		myResults.playerAnswers.Add (myPlayer.lastAnswer);
+
+		Debug.Log ("Yatta!");
+
+		Debug.Log ("You picked " + myResults.playerAnswers[0].textAnswer + " which is an awful answer.");
+
+		Debug.Log (myResults.playerAnswers.Count + "WOW!");
 		
 		// Grade answer
 		switch (myPlayer.lastAnswer.myQuestionType) {
