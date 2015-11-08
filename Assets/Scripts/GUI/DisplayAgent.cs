@@ -35,6 +35,9 @@ public class DisplayAgent : MonoBehaviour {
 	 */
 
 	void editDisplayText(){
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
 		// Grab the Card's questionText and places it on the screen
 		questionText.text = myCore.currentCard.questionText;
 	}
@@ -46,6 +49,9 @@ public class DisplayAgent : MonoBehaviour {
 	 */
 	public void playerAnswered()
 	{
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
 		// That InputField object has the text string, so we grab that
 		// declare a new answer obj passing that text string in the constructor
 		// WHERE MY LINES OF CODE AT

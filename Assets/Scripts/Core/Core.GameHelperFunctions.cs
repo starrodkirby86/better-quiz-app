@@ -59,6 +59,8 @@ public partial class Core : MonoBehaviour{
 	 * Grades the player's answer and stores the result
 	 */
 	void grade(Results myResults, Player myPlayer){
+		Debug.Log ("At grade");
+		Debug.Log (myResults.players.Count);
 		// Add player
 		myResults.players.Add (myPlayer);
 		
