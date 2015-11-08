@@ -25,15 +25,8 @@ public class GUI {
 		// repeatedly loading something unnecessarily or something like that. Grunt.
 		loadScene (Scene.AskQuestion);
 
-		// We hope that here now we can actually get things done.
-		GameObject cardText = GameObject.Find ("viewCardText");
-		//Debug.Log (cardText.GetComponent<Text> ().text);
-		if (cardText != null) {
-			Text questionText = cardText.GetComponent <Text> ();
-			questionText.text = nextQuestion.questionText;
-		}
+		// Since the loadScene() function is async, the DisplayAgent will have to setup the GUI
 
-		Debug.Log ("Look mom, I did it!");
 
 	}
 
@@ -62,30 +55,14 @@ public class GUI {
 		
 	}
 
-	/**
-	 * assert level as loaded
-	 */
-	public void levelIsLoaded()
-	{
-		isLevelLoaded = true;
-	}
-
 	/** 
 	 * Tells the GUI to load a scene
 	 * ex: Title, AskQuestion, GameOver
 	 * The return Scene is the next scene to go to
 	 * Asserts that scene is loaded.
 	 */
-	public Scene loadScene (Scene nextScene){
+	public void loadScene (Scene nextScene){
 		Application.LoadLevel (nextScene.ToString ());
-		int obama = 0;
-		while (!isLevelLoaded && (obama < 50) ) {
-			Debug.Log ("Crap.");
-			obama++;
-		}
-		if (isLevelLoaded)
-			Debug.Log ("Wow!");
-		return Scene.Title; // Placeholder
 	}
 
 }
