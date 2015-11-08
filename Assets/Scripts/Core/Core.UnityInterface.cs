@@ -33,12 +33,7 @@ public partial class Core : MonoBehaviour{
 	 * This function will just go to the title screen when complete, but it is currently hard coded to go directly to the game setup
 	 */
 	void Start () {
-		// Configure the game preferences
-		setupGame ();
 
-		// Start the game
-		// TODO: This is hardcoded now, but should be called by DisplayAgent
-		startGame ();
 	}
 	
 	// Update is called once per frame
