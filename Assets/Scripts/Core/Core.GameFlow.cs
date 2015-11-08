@@ -43,7 +43,7 @@ public partial class Core : MonoBehaviour{
 	/**
 	 * The DisplayAgent calls this function to initialize the game and start the round
 	 */
-	void startGame(){
+	public void startGame(){
 		// generate deck
 		myDeck = myDataBase.generateDeck ();
 		

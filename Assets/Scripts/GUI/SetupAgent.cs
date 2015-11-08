@@ -27,9 +27,9 @@ public class DisplayAgent : MonoBehaviour {
 	
 	
 	/**
-	 * Takes the current card of the core (drawn
-	 * from the deck), and edits the question text
-	 * to reflect this.
+	 * This function tells the core that the player is done modifying
+	 * the deck generation preferences and is ready to create the deck
+	 * and start playing
 	 */
 	
 	void editDisplayText(){
