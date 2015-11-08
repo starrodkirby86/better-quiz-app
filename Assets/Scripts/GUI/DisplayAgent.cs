@@ -20,13 +20,10 @@ public class DisplayAgent : MonoBehaviour {
 	 * When the Ask Question scene first loads, this should execute.
 	 */
 	void OnLevelWasLoaded(int level) {
+		// Make sure we have a reference to our Game Object
 		loadCache ();
-		if (myCore != null)
-			Debug.Log ("We found the Core :D");
-		else
-			Debug.Log ("No Core.... :(");
-		Debug.Log (level);
-		Debug.Log ("That level was loaded. ;)");
+
+		// Push the questionText to the screen
 		editDisplayText();
 	}
 
@@ -36,21 +33,25 @@ public class DisplayAgent : MonoBehaviour {
 	 * from the deck), and edits the question text
 	 * to reflect this.
 	 */
-	void editDisplayText()
-	{
-		Text myText = (GameObject.Find ("viewCardText")).GetComponent<Text> ();
-		myText.text = myCore.currentCard.questionText;
+	void editDisplayText(){
+		// Grab the Card's questionText and places it on the screen
+		questionText.text = myCore.currentCard.questionText;
 	}
 
 	// Cache the GameCore to improve performance
 	Core myCore;
+	Text questionText;
 
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
 		// Find Core
 		if (myCore == null) {
-			GameObject coreObject = GameObject.Find ("GameCore");
-			myCore = coreObject.GetComponent<Core>();
+			myCore = GameObject.Find ("GameCore").GetComponent<Core>();
+		}
+
+		// Find questionText
+		if (questionText == null) {
+			questionText = GameObject.Find ("viewCardText").GetComponent<Text> ();
 		}
 	}
 
