@@ -43,10 +43,15 @@ public class GUI {
 	 * When the button is pressed, the GUI will report to the Core.
 	 * Once all players are ready to move on, the Core will call nextQuestion for the GUI to ask the next question.
 	 * If there are no more questions, the Core will call displayFinalResults instead
+	 * 
+	 * Just a note: This uses the viewNextButton, which currently has pretty bad ways of hiding
+	 * the button. We may need to refactor this code in the future to efficiently and more elegantly
+	 * hide and make the button appear.
 	 */
 	public void displayQuestionResults (Results theResults){
 		GameObject myViewGradeResult = GameObject.Find ("viewGradeResult");
 		GameObject myViewGradeText = GameObject.Find ("viewGradeText");
+		GameObject myViewNextButton = GameObject.Find ("viewNextButton");
 
 		//Image myViewGradeResultImage = myViewGradeResult.GetComponents<Image> ();
 		Text myViewGradeTextComponent = myViewGradeText.GetComponent<Text> ();
@@ -59,9 +64,11 @@ public class GUI {
 			myViewGradeTextComponent.text = theResults.players [0].playerName + " got this wrong. You suck."; 
 			myViewGradeTextComponent.color = Color.red;
 		}
-		// Make it appear.
+		// Make things appear.
+		// TODO: REFACTORING, I CALL DIBS, HANDS OFF NICK -- Watson
 		myViewGradeTextComponent.enabled = true;
-	
+		(myViewNextButton.GetComponent<Image> ()).enabled = true;
+		((GameObject.Find ("viewNextButtonText")).GetComponent<Text>()).enabled = true;
 	
 	}
 
