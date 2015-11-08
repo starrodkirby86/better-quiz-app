@@ -39,7 +39,27 @@ public class DisplayAgent : MonoBehaviour {
 	void editDisplayText()
 	{
 		Text myText = (GameObject.Find ("viewCardText")).GetComponent<Text> ();
-		myText.text = myCore.currentCard.questionText;
+		myText.text = myCore.currentCard.questionText; // Overwrites the debug text
+	}
+
+	/**
+	 * This function launches from the input field UI object inside
+	 * the AskQuestion scene. This should return through to the Core
+	 * and get ready for grading (in other words, get a wrong answer!!!).
+	 */
+	public void playerAnswered()
+	{
+		// Look for viewInputAnswer game object
+		// Grab the text game component of that
+		// That Text object has the text string, so we grab that
+		// declare a new answer obj passing that text string in the constructor
+		// WHERE MY LINES OF CODE AT
+		Answer myAnswer = new Answer(((GameObject.Find ("viewInputAnswer")).GetComponent<Text> ()).text);
+
+		// Pass it to the core for grading.
+		// Hardcoded as 0 because you only have one player.
+		myCore.playerAnswer (0, myAnswer);
+
 	}
 
 	// Cache the GameCore to improve performance
