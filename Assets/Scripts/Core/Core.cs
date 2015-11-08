@@ -5,6 +5,7 @@
 using UnityEngine;					// For MonoBehaviour
 using System.Collections.Generic; 	// For Lists
 
+[System.Serializable]
 public partial class Core : MonoBehaviour {
 	 
 /*
