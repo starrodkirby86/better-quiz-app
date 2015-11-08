@@ -11,14 +11,6 @@ using System.Collections;
 [System.Serializable]
 public class LoadingAgent : MonoBehaviour {
 
-	void OnLevelWasLoaded(int level) {
-		// Make sure we have a reference to our Game Object
-		loadCache ();
-		Debug.Log ("a");
-		// Move the core to the title screen
-		myCore.loadScene (Scene.Title);
-	}
-	
 	// Cache the on screen objects to improve performance
 	Core myCore;
 	
@@ -32,7 +24,11 @@ public class LoadingAgent : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
+		// Load the title screen
+		myCore.loadScene (Scene.Title);
 	}
 	
 	// Update is called once per frame
