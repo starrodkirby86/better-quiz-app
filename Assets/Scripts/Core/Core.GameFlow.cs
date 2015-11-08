@@ -80,7 +80,7 @@ public partial class Core : MonoBehaviour{
 	 */
 	public void playerAnswer(int playerID, Answer playerAnswer){
 		// Store player's answer
-		if (players.Count > playerID)
+		if ((players.Count > playerID)&&(players[playerID].lastAnswer==null))
 			players [playerID].lastAnswer = playerAnswer;
 		else
 			DebugPlayerIndex (playerID);
