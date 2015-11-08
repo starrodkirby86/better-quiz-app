@@ -74,24 +74,59 @@ public class DataBase {
 		 * In the future, this code will need to be refactored elsewhere
 		 * depending on the user's preferences in sorting.
 		 */
-        int cardLength = result.cardsLeft();
-
-        if (deckPreferences.numberOfCards > cardLength)
+        public int weightRandomizer()
+    {
+        int sum = 0;
+        if (weight < 0)
         {
-            Debug.Log("More cards requested than available!");
+            Debug.Log("Cannot have a weight below 0!");
         }
         else
         {
-            while (cardLength != deckPreferences.numberOfCards)
+            for (int i = 0; i < loadedBinders.Count; i++)
             {
-                /**
-                 * Pick a random deck and get a random card from that deck
-                 */
-                Card newCard = loadedBinders[(Random.Range(0, loadedBinders.Count))].getCard(0, true);
+                sum += loadedBinders[i].weight;
+            }
+        }
+        while(result.cardLeft() < deckPreferences.numberOfCards)
+        {
+            int randomCard = Random.Range(0, sum);
+            int i = 0;
+            while (randomCard > loadedBinders[i].weight)
+            {
+                randomCard -= loadedBinders[i].weight;
+                i++;
+            }
+            card newCard = loadedBinders[i].getCard(0, true);
 
-                /**
-                 * Is that card not in the deck yet?
-                 */
+            if (!(result.cardMatch(newCard)))
+                result.addCard(newCard);
+            
+        }
+        result.shuffleDeck();
+
+        return result;
+    }
+    /*
+     * At the moment, this function is in the processs of being replaced by weightRandomizer */
+        public int deckRandomizer()
+        {
+            if (deckPreferences.numberOfCards > cardLength)
+            {
+                Debug.Log("More cards requested than available!");
+            }
+            else
+            {
+                while (cardLength != deckPreferences.numberOfCards)
+                {
+                    /**
+                    * Pick a random deck and get a random card from that deck
+                    */
+                    Card newCard = loadedBinders[(Random.Range(0, loadedBinders.Count))].getCard(0, true);
+
+                    /**
+                    * Is that card not in the deck yet?
+                    */
                 if (!(result.cardMatch(newCard)))
                     result.addCard(newCard); // Add it in! Else, nothing happens.
             }
@@ -101,7 +136,12 @@ public class DataBase {
 
 
         return result;
-	}
+    }
+    
+}
+        int cardLength = result.cardsLeft();
+
+        
 
 	/**
 	 * Set the maximum number of cards to put in the deck
