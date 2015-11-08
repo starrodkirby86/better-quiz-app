@@ -33,14 +33,38 @@ public class DisplayAgent : MonoBehaviour {
 	 * from the deck), and edits the question text
 	 * to reflect this.
 	 */
+
 	void editDisplayText(){
 		// Grab the Card's questionText and places it on the screen
 		questionText.text = myCore.currentCard.questionText;
 	}
 
-	// Cache the GameCore to improve performance
+	/**
+	 * This function launches from the input field UI object inside
+	 * the AskQuestion scene. This should return through to the Core
+	 * and get ready for grading (in other words, get a wrong answer!!!).
+	 */
+	public void playerAnswered()
+	{
+		// That InputField object has the text string, so we grab that
+		// declare a new answer obj passing that text string in the constructor
+		// WHERE MY LINES OF CODE AT
+		Answer myAnswer = new Answer(shortAnswerInput.text);
+
+		// Hard code short answer questions only
+		// TODO: Generalize to other question types
+		myAnswer.myQuestionType = QuestionType.ShortAnswer;
+
+		// Pass it to the core for grading.
+		// Hardcoded as 0 because you only have one player.
+		// TODO: Have the DisplayAgent recognize which player it is
+		myCore.playerAnswer (0, myAnswer);
+	}
+
+	// Cache the on screen objects to improve performance
 	Core myCore;
 	Text questionText;
+	InputField shortAnswerInput;
 
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
@@ -52,6 +76,11 @@ public class DisplayAgent : MonoBehaviour {
 		// Find questionText
 		if (questionText == null) {
 			questionText = GameObject.Find ("viewCardText").GetComponent<Text> ();
+		}
+		 
+		// Find myAnswer
+		if (shortAnswerInput == null) {
+			shortAnswerInput=GameObject.Find ("viewInputAnswer").GetComponent<InputField> ();
 		}
 	}
 

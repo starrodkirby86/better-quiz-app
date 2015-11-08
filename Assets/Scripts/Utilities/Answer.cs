@@ -20,8 +20,7 @@ public class Answer {
 	 */
 	public string textAnswer;
 
-	public Answer(string inputAnswer)
-	{
+	public Answer(string inputAnswer){
 		textAnswer = inputAnswer;
 	}
 }
