@@ -30,6 +30,7 @@ public partial class Core : MonoBehaviour{
 		addBinderFromXML ("sample");
 		addBinderFromXML ("smashBros");
 		addBinderFromXML ("TimeComplexity");
+		addBinderFromXML ("doesWeebStuffWorkOnHere");
 
 		// add a dummy player
 		addPlayer ("P1");
@@ -51,6 +52,9 @@ public partial class Core : MonoBehaviour{
 		// shuffle questions
 		myDeck.shuffleDeck ();
 
+		// Clear old results
+		myResults = new List<Results> ();
+
 		// Ask the first question
 		startRound ();
 	}
@@ -62,8 +66,8 @@ public partial class Core : MonoBehaviour{
 
 		Debug.Log ("Start round called!");
 
-		// Clear old results
-		myResults = new List<Results> ();
+		// Clear the past current results
+		currentResults = new Results ();
 
 		// Tells the GUIs to push the Question Card to the screen
 		// The GUIs will operate asyncrounously and return before the player see the question because of how loadScene() operates
@@ -130,13 +134,15 @@ public partial class Core : MonoBehaviour{
 	 * The DisplayAgent will call this function to signify that the player is ready to move onto the next question
 	 * After all players are ready, the Core will call endRound()
 	 */
-	void playerReady(int playerID){
+	public void playerReady(int playerID){
 	
 		// Store player's answer
 		if (players.Count > playerID)
-			players [playerID].isReady = false;
+			players [playerID].isReady = true;
 		else
 			DebugPlayerIndex (playerID);
+
+		Debug.Log ("You tickled me!");
 
 		// Move on if all players are ready
 		if (playersNotReady() == 0)
@@ -150,8 +156,13 @@ public partial class Core : MonoBehaviour{
 	 * This function will return by either calling startRound() or endGame()
 	 */
 	void endRound(){
+
+		Debug.Log ("We got here!");
+
 		// Store this round's results
 		myResults.Add (currentResults);
+
+		Debug.Log (myResults.Count + " is the size of the myResults");
 
 		// If we are good to ask another question, start another round
 		if (continueGame ())
