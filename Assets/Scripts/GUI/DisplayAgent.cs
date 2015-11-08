@@ -63,9 +63,9 @@ public class DisplayAgent : MonoBehaviour {
 		myAnswer.myQuestionType = QuestionType.ShortAnswer;
 
 		// Pass it to the core for grading.
-		// Hardcoded as 0 because you only have one player.
+		// Hardcoded as 1 because you only have one player.
 		// TODO: Have the DisplayAgent recognize which player it is
-		myCore.playerAnswer (0, myAnswer);
+		myCore.playerAnswer (myCore.players[0].playerID, myAnswer);
 	}
 
 	// Cache the on screen objects to improve performance

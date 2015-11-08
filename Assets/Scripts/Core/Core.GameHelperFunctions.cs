@@ -39,7 +39,7 @@ public partial class Core : MonoBehaviour{
 	int playersLeftToAnswer(){
 		int result=0;
 		foreach (Player i in players) {
-			if(i.lastAnswer!=null) result++;
+			if(i.lastAnswer==null) result++;
 		}
 		return result;
 	}
@@ -84,8 +84,11 @@ public partial class Core : MonoBehaviour{
 		case QuestionType.MultipleChoice:
 			myResults.isCorrect.Add(myPlayer.lastAnswer.multipleChoiceAnswer == myResults.originalQuestion.correctAnswer.multipleChoiceAnswer);
 			break;
-			
-		default:myResults.isCorrect.Add(false);
+		case QuestionType.ShortAnswer:
+			myResults.isCorrect.Add (myPlayer.lastAnswer.textAnswer == myResults.originalQuestion.correctAnswer.textAnswer);
+			break;
+		default:
+			myResults.isCorrect.Add(false);
 			break;
 			
 		}
