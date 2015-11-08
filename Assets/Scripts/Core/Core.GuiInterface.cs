@@ -47,6 +47,6 @@ public partial class Core : MonoBehaviour{
 	 */
 	void loadScene(Scene targetScene){
 		foreach (GUI i in myGUIs)
-			i.loadScene (Scene.NewGame);
+			i.loadScene (targetScene);
 	}
 }

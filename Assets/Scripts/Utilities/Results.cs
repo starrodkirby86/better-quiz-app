@@ -15,18 +15,18 @@ public class Results {
 	 * An array of every player who answered the question.
 	 * The index is equal to the player's ID
 	 */
-	public List<Player> players;
+	public List<Player> players=new List<Player>();
 
 	/**
 	 * An array of every player's answer to the question.
 	 * The index is equal to the player's ID
 	 */
-	public List<Answer> playerAnswers;
+	public List<Answer> playerAnswers=new List<Answer>();
 
 	/**
 	 * True if the player's answer is correct.
 	 * The index is equal to the player's number
 	 */
-	public List<bool> isCorrect;
+	public List<bool> isCorrect=new List<bool>();
 
 }

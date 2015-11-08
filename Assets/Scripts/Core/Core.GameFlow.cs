@@ -15,7 +15,8 @@ public partial class Core : MonoBehaviour{
 	public void setupGame(){
 
 		// Tell each GUI to go to the NewGame Scene
-		// loadScene (Scene.NewGame);
+//		 loadScene (Scene.NewGame);
+		loadScene (Scene.AskQuestion);
 
 		/**
 		 * The reset of this function will preset each preference to some initial values for the user
@@ -37,6 +38,7 @@ public partial class Core : MonoBehaviour{
 		myDataBase.setMaxNumberOfCards (5);
 
 		// The DisplayAgent should call startGame() when the player hits the Start Game button
+		Debug.Log ("SG");
 	}
 
 	/**
@@ -98,6 +100,10 @@ public partial class Core : MonoBehaviour{
 		// Grade all answers to the current question
 		currentResults.originalQuestion = currentCard;
 		foreach (Player i in players) {
+			Debug.Log ("a");
+
+			Debug.Log(i.ToString());
+			Debug.Log(currentResults.ToString());
 			grade (currentResults, i);
 		}
 
