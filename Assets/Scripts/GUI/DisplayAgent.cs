@@ -20,13 +20,10 @@ public class DisplayAgent : MonoBehaviour {
 	 * When the Ask Question scene first loads, this should execute.
 	 */
 	void OnLevelWasLoaded(int level) {
+		// Make sure we have a reference to our Game Object
 		loadCache ();
-		if (myCore != null)
-			Debug.Log ("We found the Core :D");
-		else
-			Debug.Log ("No Core.... :(");
-		Debug.Log (level);
-		Debug.Log ("That level was loaded. ;)");
+
+		// Push the questionText to the screen
 		editDisplayText();
 	}
 
@@ -36,10 +33,10 @@ public class DisplayAgent : MonoBehaviour {
 	 * from the deck), and edits the question text
 	 * to reflect this.
 	 */
-	void editDisplayText()
-	{
-		Text myText = (GameObject.Find ("viewCardText")).GetComponent<Text> ();
-		myText.text = myCore.currentCard.questionText; // Overwrites the debug text
+
+	void editDisplayText(){
+		// Grab the Card's questionText and places it on the screen
+		questionText.text = myCore.currentCard.questionText;
 	}
 
 	/**
@@ -49,28 +46,41 @@ public class DisplayAgent : MonoBehaviour {
 	 */
 	public void playerAnswered()
 	{
-		// Look for viewInputAnswer game object
-		// Grab the text game component of that
-		// That Text object has the text string, so we grab that
+		// That InputField object has the text string, so we grab that
 		// declare a new answer obj passing that text string in the constructor
 		// WHERE MY LINES OF CODE AT
-		Answer myAnswer = new Answer(((GameObject.Find ("viewInputAnswer")).GetComponent<InputField> ()).text);
+		Answer myAnswer = new Answer(shortAnswerInput.text);
+
+		// Hard code short answer questions only
+		// TODO: Generalize to other question types
+		myAnswer.myQuestionType = QuestionType.ShortAnswer;
 
 		// Pass it to the core for grading.
 		// Hardcoded as 0 because you only have one player.
+		// TODO: Have the DisplayAgent recognize which player it is
 		myCore.playerAnswer (0, myAnswer);
-
 	}
 
-	// Cache the GameCore to improve performance
+	// Cache the on screen objects to improve performance
 	Core myCore;
+	Text questionText;
+	InputField shortAnswerInput;
 
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
 		// Find Core
 		if (myCore == null) {
-			GameObject coreObject = GameObject.Find ("GameCore");
-			myCore = coreObject.GetComponent<Core>();
+			myCore = GameObject.Find ("GameCore").GetComponent<Core>();
+		}
+
+		// Find questionText
+		if (questionText == null) {
+			questionText = GameObject.Find ("viewCardText").GetComponent<Text> ();
+		}
+		 
+		// Find myAnswer
+		if (shortAnswerInput == null) {
+			shortAnswerInput=GameObject.Find ("viewInputAnswer").GetComponent<InputField> ();
 		}
 	}
 
