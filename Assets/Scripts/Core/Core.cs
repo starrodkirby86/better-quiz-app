@@ -13,6 +13,11 @@ public class Core : MonoBehaviour {
  */
 	
 	public DataBase myDataBase;
+
+	/**
+	 * The first element is the LocalGUI
+	 * All later elements are RemoteGUI's
+	 */
 	public List<GUI> myGUIs;
 
 /*
@@ -22,7 +27,7 @@ public class Core : MonoBehaviour {
 	 * All players in this round.
 	 * Populated in setupGame
 	 */
-	List<Player> players = new List<Player>();
+	List<Player> players;
 
 	/**
 	 * Cards to be used for the round
@@ -67,7 +72,7 @@ public class Core : MonoBehaviour {
 	}
 
 /*
- * Game Initialization Hooks
+ * Game Flow
  */
 
 	/**
@@ -76,23 +81,16 @@ public class Core : MonoBehaviour {
 	 */
 	public void setupGame(){
 
-		/**
-		// This function doesn't work yet, but it should move the GUI to the setup scene
-		foreach(GUI i in myGUIs)
-			i.loadScene(Scene.NewGame);
-		*/
+		// Tell each GUI to go to the NewGame Scene
+		loadScene (Scene.NewGame);
+
+
 
 		/**
-		 * Currently the setupGame phase is a hard debug function. But this should be
-		 * a scene switch or something for preferences.
+		 * The reset of this function will preset each preference to some initial values for the user
+		 * These values should correspond to the last preferences played by this player
+		 * Strech goal: Let the user load/save profiles
 		 */
-
-		/*
-		 * I think we need to initialize a database and GUI or something.
-		 */
-		myDataBase = new DataBase ();
-		myGUIs = new List<GUI> ();
-		myGUIs.Add (new GUI ());
 
 		Debug.Log ("Setting up game...");
 
@@ -106,21 +104,19 @@ public class Core : MonoBehaviour {
 	
 		// define deck generation preferences
 		myDataBase.setMaxNumberOfCards (5);
-		
-		// generate deck
-		myDeck = myDataBase.generateDeck ();
 
-		// shuffle questions
-		myDeck.shuffleDeck ();
+		// The DisplayAgent should call startGame() when the player hits the Start Game button
 	}
 
 	/**
-	 * Adds a player to the game
+	 * The DisplayAgent calls this function to initialize the game and start the round
 	 */
-	public Player addPlayer (string name){
-		Player tempPlayer = new Player (name);
-		players.Add (tempPlayer);
-		return tempPlayer;
+	void startGame(){
+		// generate deck
+		myDeck = myDataBase.generateDeck ();
+		
+		// shuffle questions
+		myDeck.shuffleDeck ();
 	}
 
 	/**
@@ -137,7 +133,7 @@ public class Core : MonoBehaviour {
 		// The GUIs will operate asyncrounously and return before the player see the question because of how loadScene() operates
 		askQuestion ();
 
-		// Once a player answers the question, the DisplayAgent will call playerAnswer to return the results
+		// Once a player answers the question, the DisplayAgent will call playerAnswer() to return the results
 	}
 
 	/**
@@ -171,6 +167,14 @@ public class Core : MonoBehaviour {
 			grade (currentResults, i);
 		}
 
+		// Show the results
+		viewPlayerResults ();
+	}
+
+	/**
+	 * The Core calls this function to display the results to the screne
+	 */
+	public void viewPlayerResults(){
 		// Display the round's results on the screen
 		displayQuestionResults (currentResults);
 
@@ -229,8 +233,17 @@ public class Core : MonoBehaviour {
 	}	
 
 /*
- * Subroutines
+ * Helper Functions
  */
+
+	/**
+	 * Adds a player to the game
+	 */
+	public Player addPlayer (string name){
+		Player tempPlayer = new Player (name);
+		players.Add (tempPlayer);
+		return tempPlayer;
+	}
 
 	/**
 	 * Retruns true iff we can ask another question
@@ -240,6 +253,63 @@ public class Core : MonoBehaviour {
 		// Later add option for timed countdown
 		return myDeck.cardsLeft()>0;
 	}
+
+	/**
+	 * Flag each player as not ready to go to the next question
+	 */
+	void makePlayersNotReady(){
+		foreach (Player i in players)
+			i.isReady = false;
+	}
+	
+	/**
+	 * Returns how many players have not answered
+	 */
+	int playersLeftToAnswer(){
+		int result=0;
+		foreach (Player i in players) {
+			if(i.lastAnswer!=null) result++;
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns how many players are not ready to move on
+	 */
+	int playersNotReady(){
+		int result=0;
+		foreach (Player i in players) {
+			if(!i.isReady) result++;
+		}
+		return result;
+	}
+	
+	/**
+	 * Grades the player's answer and stores the result
+	 */
+	void grade(Results myResults, Player myPlayer){
+		// Add player
+		myResults.players.Add (myPlayer);
+		
+		// Add player's answer
+		myResults.playerAnswers.Add (myPlayer.lastAnswer);
+		
+		// Grade answer
+		switch (myPlayer.lastAnswer.myQuestionType) {
+			// Compare multiple choice answers
+		case QuestionType.MultipleChoice:
+			myResults.isCorrect.Add(myPlayer.lastAnswer.multipleChoiceAnswer == myResults.originalQuestion.correctAnswer.multipleChoiceAnswer);
+			break;
+			
+		default:myResults.isCorrect.Add(false);
+			break;
+			
+		}
+	}
+
+/*
+ * Low Level GUI Interface Functions
+ */
 
 	/**
 	 * Steps to ask a question
@@ -276,63 +346,35 @@ public class Core : MonoBehaviour {
 	}
 
 	/**
-	 * Flag each player as not ready to go to the next question
+	 * Loads the scene on each GUI
 	 */
-	void makePlayersNotReady(){
-		foreach (Player i in players)
-			i.isReady = false;
+	void loadScene(Scene targetScene){
+		foreach (GUI i in myGUIs)
+			i.loadScene (Scene.NewGame);
 	}
 
-	/**
-	 * Returns how many players have not answered
-	 */
-	int playersLeftToAnswer(){
-		int result=0;
-		foreach (Player i in players) {
-			if(i.lastAnswer!=null) result++;
-		}
-		return result;
-	}
-
-	/**
-	 * Returns how many players are not ready to move on
-	 */
-	int playersNotReady(){
-		int result=0;
-		foreach (Player i in players) {
-			if(!i.isReady) result++;
-		}
-		return result;
-	}
-
-	/**
-	 * Grades the player's answer and stores the result
-	 */
-	void grade(Results myResults, Player myPlayer){
-		// Add player
-		myResults.players.Add (myPlayer);
-
-		// Add player's answer
-		myResults.playerAnswers.Add (myPlayer.lastAnswer);
-
-		// Grade answer
-		switch (myPlayer.lastAnswer.myQuestionType) {
-			// Compare multiple choice answers
-			case QuestionType.MultipleChoice:
-				myResults.isCorrect.Add(myPlayer.lastAnswer.multipleChoiceAnswer == myResults.originalQuestion.correctAnswer.multipleChoiceAnswer);
-				break;
-
-			default:myResults.isCorrect.Add(false);
-				break;
-
-		}
-	}
+/*
+ * Unity Interface
+ */
 
 	/**
 	 * Preps the Core for executing
 	 */
 	void Awake(){
-		DontDestroyOnLoad (transform.gameObject); // This is to keep the game core loaded for the other game scenes.
+		// This is to keep the game core loaded for the other game scenes.
+		DontDestroyOnLoad (transform.gameObject);
+
+		// Initialize the Player List
+		players = new List<Player>();
+
+		// Initialize the DataBase object
+		myDataBase = new DataBase ();
+
+		// Initialize the GUI List
+		myGUIs = new List<GUI> ();
+		
+		// Add the LocalGUI
+		myGUIs.Add (new GUI ());
 	}
 
 	/**
@@ -343,8 +385,9 @@ public class Core : MonoBehaviour {
 		// Configure the game preferences
 		setupGame ();
 
-		// Ask the first question
-		startRound ();
+		// Start the game
+		// TODO: This is hardcoded now, but should be called by DisplayAgent
+		startGame ();
 	}
 	
 	// Update is called once per frame
