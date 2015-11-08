@@ -43,7 +43,24 @@ public class GUI {
 	 * If there are no more questions, the Core will call displayFinalResults instead
 	 */
 	public void displayQuestionResults (Results theResults){
-		
+		GameObject myViewGradeResult = GameObject.Find ("viewGradeResult");
+		GameObject myViewGradeText = GameObject.Find ("viewGradeText");
+
+		//Image myViewGradeResultImage = myViewGradeResult.GetComponents<Image> ();
+		Text myViewGradeTextComponent = myViewGradeText.GetComponent<Text> ();
+
+		// Update the contents depending on whether you got it right or not
+		if (theResults.isCorrect [0]) {
+			myViewGradeTextComponent.text = "Hey, " + theResults.players [0].playerName + ", you got this correct!";
+			myViewGradeTextComponent.color = Color.green;
+		} else {
+			myViewGradeTextComponent.text = theResults.players [0].playerName + " got this wrong. You suck."; 
+			myViewGradeTextComponent.color = Color.red;
+		}
+		// Make it appear.
+		myViewGradeTextComponent.enabled = true;
+	
+	
 	}
 
 	/**

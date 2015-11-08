@@ -54,7 +54,7 @@ public class DisplayAgent : MonoBehaviour {
 		// That Text object has the text string, so we grab that
 		// declare a new answer obj passing that text string in the constructor
 		// WHERE MY LINES OF CODE AT
-		Answer myAnswer = new Answer(((GameObject.Find ("viewInputAnswer")).GetComponent<Text> ()).text);
+		Answer myAnswer = new Answer(((GameObject.Find ("viewInputAnswer")).GetComponent<InputField> ()).text);
 
 		// Pass it to the core for grading.
 		// Hardcoded as 0 because you only have one player.
