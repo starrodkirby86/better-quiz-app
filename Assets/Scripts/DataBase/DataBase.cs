@@ -74,6 +74,14 @@ public class DataBase {
 		 * In the future, this code will need to be refactored elsewhere
 		 * depending on the user's preferences in sorting.
 		 */
+
+        /*
+         * This function does several things: first, it computes the sum of all the binder weights.
+         * Second, it randomly selects a binder based on its weight.
+         * Third, it randomly selects a card in the randomly selected binder.
+         * FINALLY, it adds the randomly chosen card into the deck for play.
+         * Some time later down the road, this function may need to be refactored, but for now, it appears to be working.
+         */
         public int weightRandomizer()
     {
         int sum = 0;
@@ -88,7 +96,7 @@ public class DataBase {
                 sum += loadedBinders[i].weight;
             }
         }
-        while(result.cardLeft() < deckPreferences.numberOfCards)
+        while (result.cardLeft() < deckPreferences.numberOfCards)
         {
             int randomCard = Random.Range(0, sum);
             int i = 0;
@@ -101,44 +109,12 @@ public class DataBase {
 
             if (!(result.cardMatch(newCard)))
                 result.addCard(newCard);
-            
+
         }
         result.shuffleDeck();
 
         return result;
     }
-    /*
-     * At the moment, this function is in the processs of being replaced by weightRandomizer */
-        public int deckRandomizer()
-        {
-            if (deckPreferences.numberOfCards > cardLength)
-            {
-                Debug.Log("More cards requested than available!");
-            }
-            else
-            {
-                while (cardLength != deckPreferences.numberOfCards)
-                {
-                    /**
-                    * Pick a random deck and get a random card from that deck
-                    */
-                    Card newCard = loadedBinders[(Random.Range(0, loadedBinders.Count))].getCard(0, true);
-
-                    /**
-                    * Is that card not in the deck yet?
-                    */
-                if (!(result.cardMatch(newCard)))
-                    result.addCard(newCard); // Add it in! Else, nothing happens.
-            }
-            cardLength = result.cardsLeft(); // Update cardLength (We can't directly use results.cardsLeft for some reason
-            result.shuffleDeck();
-        }
-
-
-        return result;
-    }
-    
-}
         int cardLength = result.cardsLeft();
 
         
