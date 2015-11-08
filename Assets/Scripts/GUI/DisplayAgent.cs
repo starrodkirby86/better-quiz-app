@@ -23,7 +23,7 @@ public class DisplayAgent : MonoBehaviour {
 		// Find Core
 		if (myCore == null) {
 			GameObject coreObject = GameObject.Find ("GameCore");
-			Core hooray = coreObject.GetComponent<Core>();
+			myCore = coreObject.GetComponent<Core>();
 		}
 	}
 	
