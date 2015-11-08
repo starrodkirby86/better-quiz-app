@@ -17,8 +17,8 @@ public class DataBase {
 	 */
 	public int addBinderFromXML(string filename){
 		Binder newBinder = new Binder (filename); // Declare a new binder to be later added.
-
-		TextAsset xmlFile = Resources.Load (filename) as TextAsset; // We'll see how this works for now :)
+		
+		TextAsset xmlFile = Resources.Load ("XML/" + filename) as TextAsset; // We'll see how this works for now :)
 		XmlDocument questionDoc = new XmlDocument ();
 		questionDoc.LoadXml (xmlFile.text);
 
@@ -47,17 +47,16 @@ public class DataBase {
 		return true; // Pretend everything saved
 	}
 
-    /**
-     * Functions to configure the deck generation
-     */
-    /**
+/**
+ * Functions to configure the deck generation
+ */
+	/**
 	 * Compile the deck
 	 */
-    public Deck generateDeck()
-    {
-        Deck result = new Deck();
+	public Deck generateDeck(){
+		Deck result = new Deck ();
 
-        /**
+		/**
 		 * Generate the deck here
 		 * TODO:
 		 * X - Random implementation first.
@@ -66,7 +65,7 @@ public class DataBase {
 		 *   - PROFIT!
 		 */
 
-        /**
+		/**
 		 * Doing it randomly is kinky.
 		 * We keep picking cards until the amount of cards in the drawPile
 		 * is that of the numberOfCards in preferences.
@@ -75,6 +74,28 @@ public class DataBase {
 		 * depending on the user's preferences in sorting.
 		 */
 
+<<<<<<< HEAD
+		Debug.Log ("Starting deck generation...");
+
+		while (result.cardsLeft() != deckPreferences.numberOfCards) {
+			/**
+			 * Pick a random deck and get a random card from that deck
+			 */
+			Card newCard = loadedBinders[(Random.Range (0,loadedBinders.Count))].getCard (-1);
+
+			/**
+			 * Is that card not in the deck yet?
+			 */
+			if(!(result.cardMatch (newCard)))
+				result.addCard (newCard); // Add it in! Else, nothing happens.
+
+			Debug.Log (result.cardsLeft ());
+		}
+
+		result.shuffleDeck ();
+		return result;
+	}
+=======
         /*
          * This function does several things: first, it computes the sum of all the binder weights.
          * Second, it randomly selects a binder based on its weight.
@@ -118,6 +139,7 @@ public class DataBase {
         int cardLength = result.cardsLeft();
 
         
+>>>>>>> refs/remotes/origin/master
 
 	/**
 	 * Set the maximum number of cards to put in the deck
