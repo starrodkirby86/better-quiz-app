@@ -27,8 +27,7 @@ public class GameOverAgent : MonoBehaviour {
 		int questionValue = 1;
 		foreach(Results i in myCore.myResults)
 		{
-			resultsMessage += "Question " + (questionValue+1) + "\n";
-			resultsMessage += "=======================\n";
+			resultsMessage += "Question " + (questionValue) + "\n";
 			for(int j = 0; j < myCore.players.Count; ++j)
 			{
 				resultsMessage += "Player " + i.players[j].playerName + ": ";
@@ -37,8 +36,9 @@ public class GameOverAgent : MonoBehaviour {
 				else
 					resultsMessage += "X";
 
-				resultsMessage += "\n";
+				resultsMessage += "\n==================\n";
 			}
+			questionValue++;
 		}
 
 		// Send it to the UI text on the Game Over screen
