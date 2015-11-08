@@ -145,7 +145,7 @@ public class Core : MonoBehaviour {
 	 */
 	public void playerAnswer(int playerID, Answer playerAnswer){
 		// Store player's answer
-		if (players.Count () < playerID)
+		if (players.Count < playerID)
 			players [playerID].lastAnswer = playerAnswer;
 		else
 			DebugPlayerIndex (playerID);
@@ -186,13 +186,13 @@ public class Core : MonoBehaviour {
 	 */
 	void playerReady(int playerID){
 		// Store player's answer
-		if (players.Count () < playerID)
+		if (players.Count < playerID)
 			players [playerID].isReady = false;
 		else
 			DebugPlayerIndex (playerID);
 
 		// Move on if all players are ready
-		if (playersNotReady == 0)
+		if (playersNotReady() == 0)
 			endRound ();
 	}
 
@@ -223,30 +223,10 @@ public class Core : MonoBehaviour {
 	 * 		- Start another round (regenerate the deck with the same settings)
 	 */
 	public void endGame (){
-		displayFinalResults ();
+		displayFinalResults (myResults);
 
 		// The DisplayAgent will decide which state to go to next based on user input
-	}
-
-/**
- * Main Loop Hooks
- */
-
-	/** 
-	 * Records a player's answer for the current question
-	 */
-	public void answerQuestion (Player myPlayer, Answer myAnswer){
-		myPlayer.lastAnswer = myAnswer;
-	}
-
-	/** 
-	 * Tells the Core that the player is ready to start the next question
-	 */
-	public void playerReady (int playerID){
-		foreach (Player i in players)
-			if(i.playerID==playerID) 
-				i.isReady=true;
-	}
+	}	
 
 /*
  * Subroutines
@@ -290,7 +270,7 @@ public class Core : MonoBehaviour {
 	/**
 	 * Display the final results on each GUI
 	 */
-	void displayFinalResults(finalResults){
+	void displayFinalResults(List<Results> finalResults){
 		foreach (GUI i in myGUIs)
 			i.displayFinalResults (finalResults);
 	}
@@ -349,23 +329,6 @@ public class Core : MonoBehaviour {
 	}
 
 	/**
-	 * Assert level was true.
-	 */
-	public void makeGUILevelTrue()
-	{
-		foreach(GUI i in myGUIs)
-			i.levelIsLoaded ();
-	}
-
-	/**
-	* This is a dummy wait function.
-	*/
-	IEnumerator dontWorryAboutThis() {
-		print (Time.time);
-		yield return new WaitForSeconds (5);
-		print (Time.time);
-	}
-	/**
 	 * Preps the Core for executing
 	 */
 	void Awake(){
@@ -374,13 +337,13 @@ public class Core : MonoBehaviour {
 
 	/**
 	 * Executes when game starts
+	 * This function will just go to the title screen when complete, but it is currently hard coded to go directly to the game setup
 	 */
 	void Start () {
-		// moves from the title screen to the setup round screen
-		// I will kill dontWorryAboutThis soon, I Just need this for sanity
-		// and flow
-		StartCoroutine (dontWorryAboutThis ());
+		// Configure the game preferences
 		setupGame ();
+
+		// Ask the first question
 		startRound ();
 	}
 	
@@ -397,7 +360,7 @@ public class Core : MonoBehaviour {
 	 * This function displays an error when the player's index is out of range
 	 */
 	void DebugPlayerIndex(int playerID){
-		Debug.Log ("Error: Player " + playerID + " does not exist\nOnly "+players.Count"+ people are playing");
+		Debug.Log ("Error: Player " + playerID.ToString() + " does not exist\nOnly "+players.Count.ToString()+"+ people are playing");
 	}
 		
 }
