@@ -77,7 +77,7 @@ public class DisplayAgent : MonoBehaviour {
 		if (questionText == null) {
 			questionText = GameObject.Find ("viewCardText").GetComponent<Text> ();
 		}
-
+		 
 		// Find myAnswer
 		if (shortAnswerInput == null) {
 			shortAnswerInput=GameObject.Find ("viewInputAnswer").GetComponent<InputField> ();
