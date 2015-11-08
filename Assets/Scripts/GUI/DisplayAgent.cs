@@ -8,7 +8,7 @@ public class DisplayAgent : MonoBehaviour {
 	 */
 	void OnLevelWasLoaded(int level) {
 		loadCache ();
-		if (hooray != null)
+		if (myCore != null)
 			Debug.Log ("We found the Core :D");
 		else
 			Debug.Log ("No Core.... :(");
@@ -17,11 +17,11 @@ public class DisplayAgent : MonoBehaviour {
 	}
 
 	// Cache the GameCore to improve performance
-	Core hooray;
+	Core myCore;
 
 	void loadCache(){
 		// Find Core
-		if (hooray == null) {
+		if (myCore == null) {
 			GameObject coreObject = GameObject.Find ("GameCore");
 			Core hooray = coreObject.GetComponent<Core>();
 		}
