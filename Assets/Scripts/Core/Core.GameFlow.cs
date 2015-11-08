@@ -30,6 +30,7 @@ public partial class Core : MonoBehaviour{
 		addBinderFromXML ("smashBros");
 		addBinderFromXML ("TimeComplexity");
 		addBinderFromXML ("doesWeebStuffWorkOnHere");
+		addBinderFromXML ("sample"); // This deck is ignored lol
 
 		// add a dummy player
 		addPlayer ("P1");

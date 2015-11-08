@@ -1,7 +1,6 @@
-
 /*
- * The TitleAgent is responsible for moving the user past the title screen
- * 		- Setup Game: Move to the configuration screen
+ * The OptionAgent is responsible for letting the user configure where to save
+ * the preferences file and where to look for binders
  */
 
 using UnityEngine;
@@ -9,29 +8,35 @@ using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
-public class TitleAgent : MonoBehaviour {
+public class OptionAgent : MonoBehaviour {
 	
 	/**
-	 * Tells the Core to setup the game
+	 * Tells the Core to save the preferences
 	 */
 	
-	public void setupGame(){
+	public void saveAndQuit(){
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 
-		// Tell the core to move to the setupGame state
-		myCore.setupGame ();
+		//TODO: Save Preferences
+
+		// After preferences are saved, quit to title screen
+		quit ();
 	}
-
+	
 	/**
-	 * Tells the Core to go to options
+	 * Tells the Core to go to the title screen
 	 */
 
-	public void options(){
+	public void quit(){
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 
-		// Tell the core to move to the Option state
+		// Load the title scene
+		myCore.loadScene (Scene.Title);
+	}
+	
+	public void options(){
 		myCore.loadScene (Scene.Options);
 	}
 	
@@ -56,4 +61,5 @@ public class TitleAgent : MonoBehaviour {
 		
 	}
 }
+
 

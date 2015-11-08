@@ -78,7 +78,7 @@ public class GUI {
 	 * There should also be an option for the player to review all of it's questions and answers
 	 */
 	public void displayFinalResults (List<Results> theResults){
-		
+		loadScene (Scene.GameOver);
 	}
 
 	/** 
@@ -89,7 +89,6 @@ public class GUI {
 	 */
 	public void loadScene (Scene nextScene){
 		Debug.Log ("LOADING " + nextScene.ToString ());
-//		Application.LoadLevel (nextScene.ToString ());
 		Application.LoadLevelAsync (nextScene.ToString());
 	}
 
