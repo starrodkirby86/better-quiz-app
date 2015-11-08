@@ -52,6 +52,9 @@ public partial class Core : MonoBehaviour{
 		// shuffle questions
 		myDeck.shuffleDeck ();
 
+		// Clear old results
+		myResults = new List<Results> ();
+
 		// Ask the first question
 		startRound ();
 	}
@@ -63,8 +66,8 @@ public partial class Core : MonoBehaviour{
 
 		Debug.Log ("Start round called!");
 
-		// Clear old results
-		myResults = new List<Results> ();
+		// Clear the past current results
+		currentResults = new Results ();
 
 		// Tells the GUIs to push the Question Card to the screen
 		// The GUIs will operate asyncrounously and return before the player see the question because of how loadScene() operates
@@ -135,9 +138,11 @@ public partial class Core : MonoBehaviour{
 	
 		// Store player's answer
 		if (players.Count > playerID)
-			players [playerID].isReady = false;
+			players [playerID].isReady = true;
 		else
 			DebugPlayerIndex (playerID);
+
+		Debug.Log ("You tickled me!");
 
 		// Move on if all players are ready
 		if (playersNotReady() == 0)
@@ -156,6 +161,8 @@ public partial class Core : MonoBehaviour{
 
 		// Store this round's results
 		myResults.Add (currentResults);
+
+		Debug.Log (myResults.Count + " is the size of the myResults");
 
 		// If we are good to ask another question, start another round
 		if (continueGame ())

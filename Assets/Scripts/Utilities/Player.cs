@@ -41,7 +41,7 @@ public class Player {
 	/** 
 	 * True iff the player is ready to move to the next question
 	 */
-	public bool isReady;
+	public bool isReady = false;
 
 
 }
