@@ -15,8 +15,7 @@ public partial class Core : MonoBehaviour{
 	public void setupGame(){
 
 		// Tell each GUI to go to the NewGame Scene
-//		 loadScene (Scene.NewGame);
-		loadScene (Scene.AskQuestion);
+		 loadScene (Scene.NewGame);
 
 		/**
 		 * The reset of this function will preset each preference to some initial values for the user
@@ -45,7 +44,7 @@ public partial class Core : MonoBehaviour{
 	/**
 	 * The DisplayAgent calls this function to initialize the game and start the round
 	 */
-	void startGame(){
+	public void startGame(){
 		// generate deck
 		myDeck = myDataBase.generateDeck ();
 		

@@ -78,15 +78,17 @@ public partial class Core : MonoBehaviour{
 		Debug.Log ("You picked " + myResults.playerAnswers[0].textAnswer + " which is an awful answer.");
 
 		Debug.Log (myResults.playerAnswers.Count + "WOW!");
-		
+
+
 		// Grade answer
+		// The answers should be case insensitive
 		switch (myPlayer.lastAnswer.myQuestionType) {
 			// Compare multiple choice answers
 		case QuestionType.MultipleChoice:
-			myResults.isCorrect.Add(myPlayer.lastAnswer.multipleChoiceAnswer == myResults.originalQuestion.correctAnswer.multipleChoiceAnswer);
+			myResults.isCorrect.Add(myPlayer.lastAnswer.multipleChoiceAnswer.ToString().ToUpper() == myResults.originalQuestion.correctAnswer.multipleChoiceAnswer.ToString().ToUpper());
 			break;
 		case QuestionType.ShortAnswer:
-			myResults.isCorrect.Add (myPlayer.lastAnswer.textAnswer == myResults.originalQuestion.correctAnswer.textAnswer);
+			myResults.isCorrect.Add (myPlayer.lastAnswer.textAnswer.ToUpper() == myResults.originalQuestion.correctAnswer.textAnswer.ToUpper());
 			break;
 		default:
 			myResults.isCorrect.Add(false);
