@@ -19,6 +19,7 @@ public class TitleAgent : MonoBehaviour {
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 
+		// Tell the core to move to the setupGame state
 		myCore.setupGame ();
 	}
 
@@ -27,6 +28,10 @@ public class TitleAgent : MonoBehaviour {
 	 */
 
 	public void options(){
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
+		// Tell the core to move to the Option state
 		myCore.loadScene (Scene.Options);
 	}
 	

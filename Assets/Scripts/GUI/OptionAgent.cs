@@ -19,6 +19,9 @@ public class OptionAgent : MonoBehaviour {
 		loadCache ();
 
 		//TODO: Save Preferences
+
+		// After preferences are saved, quit to title screen
+		quit ();
 	}
 	
 	/**
