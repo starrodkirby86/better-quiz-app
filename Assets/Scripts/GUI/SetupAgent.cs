@@ -39,12 +39,27 @@ public class SetupAgent : MonoBehaviour {
 		// Start the game
 		myCore.startGame ();
 	}
+
+	/**
+	 * This function tells the Core to adjust the number of cards to generate
+	 */
+	public void updateNumberOfCards(){
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
+		// Find what the new max number of cards is
+		int max = int.Parse(numberOfCards.text);
+
+		// Update the Core
+		myCore.setNumberOfCards (max);
+
+	}
 	
 
 	
 	// Cache the on screen objects to improve performance
 	Core myCore;
-	InputField shortAnswerInput;
+	InputField numberOfCards;
 	
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
@@ -54,9 +69,9 @@ public class SetupAgent : MonoBehaviour {
 		}
 		
 		// Find myAnswer
-//		if (shortAnswerInput == null) {
-//			shortAnswerInput=GameObject.Find ("viewInputAnswer").GetComponent<InputField> ();
-//		}
+		if (numberOfCards == null) {
+			numberOfCards=GameObject.Find ("NumberOfCards").GetComponent<InputField> ();
+		}
 	}
 	
 	// Use this for initialization
