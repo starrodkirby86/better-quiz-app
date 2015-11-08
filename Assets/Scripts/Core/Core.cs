@@ -27,18 +27,18 @@ public partial class Core : MonoBehaviour {
 	 * All players in this round.
 	 * Populated in setupGame
 	 */
-	List<Player> players;
+	public List<Player> players;
 
 	/**
 	 * Cards to be used for the round
 	 * Populated in setupGame
 	 */
-	Deck myDeck;
+	public Deck myDeck;
 
 	/**
 	 * Holds the results to every question that has been asked
 	 */
-	List<Results> myResults;
+	public List<Results> myResults;
 
 	/**
 	 * The card coresponding to the current question
@@ -51,6 +51,6 @@ public partial class Core : MonoBehaviour {
 	 * It is populated by gradeAllPlayers()
 	 * It is stored into myResults by endRound()
 	 */
-	Results currentResults;
+	public Results currentResults;
 
 }
