@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AskQuestionLoaded : MonoBehaviour {
-
+public class DisplayAgent : MonoBehaviour {
+	
 	/**
 	 * On level was loaded...
 	 */
@@ -16,14 +16,14 @@ public class AskQuestionLoaded : MonoBehaviour {
 		Debug.Log (level);
 		Debug.Log ("That level was loaded. ;)");
 	}
-
+	
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }
