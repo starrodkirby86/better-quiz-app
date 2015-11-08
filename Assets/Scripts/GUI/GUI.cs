@@ -89,7 +89,6 @@ public class GUI {
 	 */
 	public void loadScene (Scene nextScene){
 		Debug.Log ("LOADING " + nextScene.ToString ());
-//		Application.LoadLevel (nextScene.ToString ());
 		Application.LoadLevelAsync (nextScene.ToString());
 	}
 

@@ -1,6 +1,10 @@
 ﻿/**
  * An enumerated type to differentiate between different GUI scenes
  * 
+ * Loading: The initialization scene
+ * 		- Ideally the player never sees this scene
+ * 		- It is used to initaite the core
+ * 
  * Title: The title screen. A welcoming splash screen that gives the player the option to
  * 		- Start a new game
  * 		- Add folders to the binder library
@@ -38,7 +42,7 @@
  * 			- Core should initialize the settings with the same settings as the last game
  * 		- Button to quit (return Scene.Title when pressed)
  */
-public enum Scene {Title, NewGame, AskQuestion, QuestionResults, GameOver};
+public enum Scene {Loading, Title, Options, NewGame, AskQuestion, QuestionResults, GameOver};
 
 /**
  * An enumerated type to differentiate between different Question Types

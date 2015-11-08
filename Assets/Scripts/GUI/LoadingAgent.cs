@@ -1,7 +1,7 @@
-
 /*
- * The TitleAgent is responsible for moving the user past the title screen
- * 		- Setup Game: Move to the configuration screen
+ * The LoadingAgent is responsible for moving the game to the title screen
+ * when the assets are loaded.
+ * Any persistant objects must be declared here and call DontDestroyOnLoad(transform.gameObject);
  */
 
 using UnityEngine;
@@ -9,27 +9,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
-public class TitleAgent : MonoBehaviour {
-	
-	/**
-	 * Tells the Core to setup the game
-	 */
-	
-	public void setupGame(){
-		// Make sure we have a reference to our Game Object
-		loadCache ();
+public class LoadingAgent : MonoBehaviour {
 
-		myCore.setupGame ();
-	}
-
-	/**
-	 * Tells the Core to go to options
-	 */
-
-	public void options(){
-		myCore.loadScene (Scene.Options);
-	}
-	
 	// Cache the on screen objects to improve performance
 	Core myCore;
 	
@@ -43,7 +24,11 @@ public class TitleAgent : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
+		// Load the title screen
+		myCore.loadScene (Scene.Title);
 	}
 	
 	// Update is called once per frame
@@ -51,4 +36,6 @@ public class TitleAgent : MonoBehaviour {
 		
 	}
 }
+
+
 
