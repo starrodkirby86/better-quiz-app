@@ -29,6 +29,7 @@ public partial class Core : MonoBehaviour{
 		addBinderFromXML ("sample");
 		addBinderFromXML ("smashBros");
 		addBinderFromXML ("TimeComplexity");
+		addBinderFromXML ("doesWeebStuffWorkOnHere");
 
 		// add a dummy player
 		addPlayer ("P1");
@@ -129,7 +130,7 @@ public partial class Core : MonoBehaviour{
 	 * The DisplayAgent will call this function to signify that the player is ready to move onto the next question
 	 * After all players are ready, the Core will call endRound()
 	 */
-	void playerReady(int playerID){
+	public void playerReady(int playerID){
 	
 		// Store player's answer
 		if (players.Count > playerID)
@@ -149,6 +150,9 @@ public partial class Core : MonoBehaviour{
 	 * This function will return by either calling startRound() or endGame()
 	 */
 	void endRound(){
+
+		Debug.Log ("We got here!");
+
 		// Store this round's results
 		myResults.Add (currentResults);
 

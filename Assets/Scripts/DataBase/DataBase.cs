@@ -6,6 +6,7 @@ using System.Xml; // For XML
  * The DataBase stores all cards and binders into XML files as well as parsing XML files into classes
  * It also generates a deck based on user preferences
  */
+[System.Serializable]
 public class DataBase {
 
 /*
@@ -79,6 +80,9 @@ public class DataBase {
          * Third, it randomly selects a card in the randomly selected binder.
          * FINALLY, it adds the randomly chosen card into the deck for play.
          * Some time later down the road, this function may need to be refactored, but for now, it appears to be working.
+         * 
+         * TODO: The random weighting system seems to be off. The last deck is ignored.
+         *       Please fix regarding that.
          */
 
         int sum = 0;
@@ -130,7 +134,7 @@ public class DataBase {
 /**
  * Internal Variabes
  */
-	List<Binder> loadedBinders = new List<Binder> ();
-	GenerationPreferences deckPreferences = new GenerationPreferences();
+	public List<Binder> loadedBinders = new List<Binder> ();
+	public GenerationPreferences deckPreferences = new GenerationPreferences();
 
 }
