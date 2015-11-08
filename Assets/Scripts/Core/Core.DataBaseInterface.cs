@@ -19,4 +19,15 @@ public partial class Core : MonoBehaviour{
 	public Binder[] getAllBinders(){
 		return myDataBase.viewBinders();
 	}
+
+/*
+ * Configures the Deck Generator
+ */
+
+	/**
+	 * Determines how many cards the deck generator chooses
+	 */
+	public void setNumberOfCards(int number){
+		myDataBase.setMaxNumberOfCards(number);
+	}
 }

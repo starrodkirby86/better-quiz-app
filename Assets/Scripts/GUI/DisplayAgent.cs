@@ -68,6 +68,16 @@ public class DisplayAgent : MonoBehaviour {
 		myCore.playerAnswer (myCore.players[0].playerID, myAnswer);
 	}
 
+	/**
+	 * Launch the player is ready function for the current player.
+	 * This is a wrapper function that works like a stub. In the future,
+	 * we hope that this function is more useful. I guess. Hahaha.
+	 */
+	public void launchPlayerReady()
+	{
+		myCore.playerReady (myCore.players [0].playerID);
+	}
+
 	// Cache the on screen objects to improve performance
 	Core myCore;
 	Text questionText;
