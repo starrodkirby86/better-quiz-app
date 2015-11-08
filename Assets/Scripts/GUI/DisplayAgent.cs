@@ -11,7 +11,7 @@ using UnityEngine;
 using System.Collections;
 
 public class DisplayAgent : MonoBehaviour {
-	
+	 
 	/**
 	 * Called every time the Scene was loaded
 	 * Note: Only triggers on Application.LoadLevel()
