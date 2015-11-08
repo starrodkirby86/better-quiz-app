@@ -76,10 +76,12 @@ public partial class Core : MonoBehaviour{
 	 */
 	public void playerAnswer(int playerID, Answer playerAnswer){
 		// Store player's answer
-		if (players.Count < playerID)
+		if (players.Count > playerID)
 			players [playerID].lastAnswer = playerAnswer;
 		else
 			DebugPlayerIndex (playerID);
+
+
 
 		// Move on if all players have answered
 		if (playersLeftToAnswer () == 0)
@@ -128,8 +130,9 @@ public partial class Core : MonoBehaviour{
 	 * After all players are ready, the Core will call endRound()
 	 */
 	void playerReady(int playerID){
+	
 		// Store player's answer
-		if (players.Count < playerID)
+		if (players.Count > playerID)
 			players [playerID].isReady = false;
 		else
 			DebugPlayerIndex (playerID);
