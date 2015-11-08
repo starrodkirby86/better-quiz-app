@@ -52,6 +52,7 @@ public partial class Core : MonoBehaviour{
 		foreach (Player i in players) {
 			if(!i.isReady) result++;
 		}
+		Debug.Log (result);
 		return result;
 	}
 	
