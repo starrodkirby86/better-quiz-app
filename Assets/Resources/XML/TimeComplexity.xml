@@ -1,7 +1,7 @@
 <Flipbook>
   <Card>
     <Question>
-    Which data type has a time complexity of O(1) for access?
+    Which data structure has a time complexity of O(1) for access?
     A: Array
     B: Singly-Linked List
     C: Stack
@@ -11,7 +11,7 @@
   </Card>
   <Card>
     <Question>
-    Which data type does NOT have a time complexity of O(N) for search?
+    Which data structure does NOT have a time complexity of O(N) for search?
     A: Singly-Linked List
     B: Array
     C: Binary Search Tree
@@ -41,7 +41,7 @@
   </Card>
   <Card>
     <Question>
-    Which data type has a time complexity of O(1) for deletion?
+    Which data structure has a time complexity of O(1) for deletion?
     A: Stack
     B: Doubly-Linked list
     C: Binary Search Tree

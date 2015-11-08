@@ -74,6 +74,7 @@ public class DataBase {
 		 * depending on the user's preferences in sorting.
 		 */
 
+<<<<<<< HEAD
 		Debug.Log ("Starting deck generation...");
 
 		while (result.cardsLeft() != deckPreferences.numberOfCards) {
@@ -94,6 +95,51 @@ public class DataBase {
 		result.shuffleDeck ();
 		return result;
 	}
+=======
+        /*
+         * This function does several things: first, it computes the sum of all the binder weights.
+         * Second, it randomly selects a binder based on its weight.
+         * Third, it randomly selects a card in the randomly selected binder.
+         * FINALLY, it adds the randomly chosen card into the deck for play.
+         * Some time later down the road, this function may need to be refactored, but for now, it appears to be working.
+         */
+        public int weightRandomizer()
+    {
+        int sum = 0;
+        if (weight < 0)
+        {
+            Debug.Log("Cannot have a weight below 0!");
+        }
+        else
+        {
+            for (int i = 0; i < loadedBinders.Count; i++)
+            {
+                sum += loadedBinders[i].weight;
+            }
+        }
+        while (result.cardsLeft() < deckPreferences.numberOfCards)
+        {
+            int randomCard = Random.Range(0, sum);
+            int i = 0;
+            while (randomCard > loadedBinders[i].weight)
+            {
+                randomCard -= loadedBinders[i].weight;
+                i++;
+            }
+            card newCard = loadedBinders[i].getCard(0, true);
+
+            if (!(result.cardMatch(newCard)))
+                result.addCard(newCard);
+
+        }
+        result.shuffleDeck();
+
+        return result;
+    }
+        int cardLength = result.cardsLeft();
+
+        
+>>>>>>> refs/remotes/origin/master
 
 	/**
 	 * Set the maximum number of cards to put in the deck

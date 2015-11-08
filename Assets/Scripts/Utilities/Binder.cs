@@ -33,6 +33,7 @@ public class Binder {
 	public Binder(string name) {
 		filename = name;
 		myCards = new List<Card> ();
+        weight = 1;
 	}
 
 	/**
