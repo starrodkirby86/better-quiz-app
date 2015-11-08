@@ -9,7 +9,10 @@ public class AskQuestionLoaded : MonoBehaviour {
 	void OnLevelWasLoaded(int level) {
 		GameObject coreObject = GameObject.Find ("GameCore");
 		Core hooray = coreObject.GetComponent<Core>();
-		hooray.makeGUILevelTrue ();
+		if (hooray != null)
+			Debug.Log ("We found the Core :D");
+		else
+			Debug.Log ("No Core.... :(");
 		Debug.Log (level);
 		Debug.Log ("That level was loaded. ;)");
 	}
