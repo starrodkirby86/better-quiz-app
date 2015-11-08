@@ -1,6 +1,8 @@
 ﻿/** 
  * Utility Class used to pass question data between modules
  */
+
+[System.Serializable]
 public class Card {
 	/**
 	 * The type of question being asked

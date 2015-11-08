@@ -1,6 +1,8 @@
 ﻿/**
  * A class for passing the user's answer to the question from the GUI to the Core
  */
+
+[System.Serializable]
 public class Answer {
 	/**
 	 * The type of question being answered

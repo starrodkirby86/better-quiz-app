@@ -1,6 +1,8 @@
 ﻿/**
  * Utility Class used to hold player data
  */
+
+[System.Serializable]
 public class Player {
 
 	public Player(string playerName){
