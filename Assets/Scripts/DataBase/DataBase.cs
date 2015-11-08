@@ -96,7 +96,7 @@ public class DataBase {
                 sum += loadedBinders[i].weight;
             }
         }
-        while (result.cardLeft() < deckPreferences.numberOfCards)
+        while (result.cardsLeft() < deckPreferences.numberOfCards)
         {
             int randomCard = Random.Range(0, sum);
             int i = 0;
