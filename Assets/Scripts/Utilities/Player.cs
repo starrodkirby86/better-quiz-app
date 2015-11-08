@@ -30,7 +30,7 @@ public class Player {
 	 * ex: A player with ID=2 would be P3
 	 * ex: A player with ID=3 would be P4
 	 */
-	static int lastPlayerID=0;
+	static int lastPlayerID=-1;
 
 	/**
 	 * The player's last answer. The core should set this to null before pushing the next question to the GUI.

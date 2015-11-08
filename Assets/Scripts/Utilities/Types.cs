@@ -43,4 +43,4 @@ public enum Scene {Title, NewGame, AskQuestion, QuestionResults, GameOver};
 /**
  * An enumerated type to differentiate between different Question Types
  */
-public enum QuestionType {MultipleChoice, ShortAnswer};
+public enum QuestionType {ShortAnswer, MultipleChoice};
