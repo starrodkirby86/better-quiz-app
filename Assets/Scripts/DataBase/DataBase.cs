@@ -97,7 +97,7 @@ public class DataBase {
 			Debug.Log ("Cannot have a weight below 0! You suck. Nothing happens.");
 		else {
 			while (result.cardsLeft() < deckPreferences.numberOfCards) {
-				int randomCard = Random.Range (0, sum);
+				int randomCard = Random.Range (0, sum+1);
 				int i = 0;
 				while (randomCard > loadedBinders[i].weight) {
 					randomCard -= loadedBinders [i].weight;
