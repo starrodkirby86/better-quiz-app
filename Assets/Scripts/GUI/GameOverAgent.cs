@@ -28,10 +28,7 @@ public class GameOverAgent : MonoBehaviour {
 		foreach(Results i in myCore.myResults)
 		{
 			resultsMessage += "Question " + (questionValue) + "\n";
-<<<<<<< HEAD
 			resultsMessage += "=================\n";
-=======
->>>>>>> refs/remotes/origin/master
 			for(int j = 0; j < myCore.players.Count; ++j)
 			{
 				resultsMessage += "Player " + i.players[j].playerName + ": ";
