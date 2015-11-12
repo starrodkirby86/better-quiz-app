@@ -32,7 +32,7 @@ public partial class Core : MonoBehaviour{
 		addBinderFromXML ("doesWeebStuffWorkOnHere");
 
 		// add a dummy player
-		addPlayer ("P1");
+		addPlayer ("P1"); 
 	
 		// define deck generation preferences
 		myDataBase.setMaxNumberOfCards (5);
@@ -80,7 +80,7 @@ public partial class Core : MonoBehaviour{
 	 */
 	public void playerAnswer(int playerID, Answer playerAnswer){
 		// Store player's answer
-		if (players.Count > playerID)
+		if ((players.Count > playerID)&&(players[playerID].lastAnswer==null))
 			players [playerID].lastAnswer = playerAnswer;
 		else
 			DebugPlayerIndex (playerID);

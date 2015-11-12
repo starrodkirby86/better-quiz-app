@@ -25,7 +25,7 @@ public partial class Core : MonoBehaviour {
  */
 	/**
 	 * All players in this round.
-	 * Populated in setupGame
+	 * Populated in setupGame 
 	 */
 	public List<Player> players;
 
