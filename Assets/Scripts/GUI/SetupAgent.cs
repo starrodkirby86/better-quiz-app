@@ -55,23 +55,46 @@ public class SetupAgent : MonoBehaviour {
 		myCore.setNumberOfCards (max);
 
 	}
+
+	/**
+	 * Lets the player type in a custom name
+	 * Currently it is hard coded to player one
+	 * TODO: Generalize the UI to allow multiple players
+	 */
+	public void updatePlayerName(){
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
+		// Find new name for player
+		string newName = playerName.text;
+
+		// Store new name in Core
+		myCore.players [0].playerName = newName;
+
+	}
 	
 
 	
 	// Cache the on screen objects to improve performance
 	Core myCore;
 	InputField numberOfCards;
+	InputField playerName;
 	
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
-		// Find Core
+		// Find myCore
 		if (myCore == null) {
 			myCore = GameObject.Find ("GameCore").GetComponent<Core>();
 		}
 		
-		// Find myAnswer
+		// Find numberOfCards
 		if (numberOfCards == null) {
 			numberOfCards=GameObject.Find ("NumberOfCards").GetComponent<InputField> ();
+		}
+
+		// Find playerName
+		if (playerName == null) {
+			playerName=GameObject.Find ("PlayerNameInput").GetComponent<InputField> ();
 		}
 	}
 	
