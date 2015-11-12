@@ -53,6 +53,6 @@ public class Binder {
 		if(index >= 0 && index < myCards.Count)
 			return myCards[index];
 		else
-			return myCards[(Random.Range(0,myCards.Count-1))];
+			return myCards[(Random.Range(0,myCards.Count))];
 	}
 }
