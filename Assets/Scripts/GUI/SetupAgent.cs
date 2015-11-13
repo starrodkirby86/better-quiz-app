@@ -22,8 +22,17 @@ public class SetupAgent : MonoBehaviour {
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 		
-		// Initialize sliders with the last used values
+		/**
+		 * Initialize sliders with the last used values
+		 */
+
+		// Load last preferences for how many cards to put in the deck
 		numberOfCards.text = myCore.myDataBase.deckPreferences.numberOfCards.ToString();
+
+		// Load the player's last nickname
+		// Right now this is hard coded for P1
+		// TODO: Generalize to all players
+		playerName.text = myCore.players [0].playerName;
 	}
 	
 	

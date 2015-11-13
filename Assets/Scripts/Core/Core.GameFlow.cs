@@ -79,11 +79,14 @@ public partial class Core : MonoBehaviour{
 	 * DisplayAgent will call this function to pass the player's answer to the core. Once all the players have answered, the Core will call grade()
 	 */
 	public void playerAnswer(int playerID, Answer playerAnswer){
+		Debug.Log ("grading " + playerID.ToString ());
 		// Store player's answer
-		if ((players.Count > playerID)&&(players[playerID].lastAnswer==null))
+		if ((players.Count > playerID) && (players [playerID].lastAnswer == null))
 			players [playerID].lastAnswer = playerAnswer;
-		else
+		else {
+			Debug.Log("Player out of range in playerAnswer(playerID,playerAnswer)");
 			DebugPlayerIndex (playerID);
+		}
 
 
 

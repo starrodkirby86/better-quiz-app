@@ -50,6 +50,7 @@ public class DisplayAgent : MonoBehaviour {
 	 */
 	public void playerAnswered()
 	{
+		Debug.Log ("player answered");
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 

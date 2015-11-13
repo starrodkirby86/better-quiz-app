@@ -11,8 +11,13 @@ public partial class Core : MonoBehaviour{
 	 * Adds a player to the game
 	 */
 	public Player addPlayer (string name){
+		// Create a new player
 		Player tempPlayer = new Player (name);
+
+		// Add the player to the list of players
 		players.Add (tempPlayer);
+
+		// TODO: Is this necesary?
 		return tempPlayer;
 	}
 
@@ -82,25 +87,30 @@ public partial class Core : MonoBehaviour{
 
 		// Grade answer
 		// The answers are case insensitive
+		// If the function does not know how to grade the question, grades it false
+
+		// For readability
+		string playerAnswer;
+		string correctAnswer;
 
 		switch (myPlayer.lastAnswer.myQuestionType) {
 			// Compare multiple choice answers
 		case QuestionType.MultipleChoice:
 			// Grab player's answer
-			string playerAnswer = myPlayer.lastAnswer.multipleChoiceAnswer.ToString().ToUpper();
+			playerAnswer = myPlayer.lastAnswer.multipleChoiceAnswer.ToString().ToUpper();
 
 			// Grab correct answer
-			string correctAnswer = myResults.originalQuestion.correctAnswer.multipleChoiceAnswer.ToString().ToUpper();
+			correctAnswer = myResults.originalQuestion.correctAnswer.multipleChoiceAnswer.ToString().ToUpper();
 
 			// Grade answer and push to results List
 			myResults.isCorrect.Add(playerAnswer == correctAnswer);
 			break;
 		case QuestionType.ShortAnswer:
 			// Grab player's answer
-			string playerAnswer = myPlayer.lastAnswer.textAnswer.ToUpper();
+			playerAnswer = myPlayer.lastAnswer.textAnswer.ToUpper();
 
 			// Grab correct answer
-			string correctAnswer = myResults.originalQuestion.correctAnswer.textAnswer.ToUpper();
+			correctAnswer = myResults.originalQuestion.correctAnswer.textAnswer.ToUpper();
 
 			// Grade answer and push to results List
 			myResults.isCorrect.Add (playerAnswer == correctAnswer);
