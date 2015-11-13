@@ -1,7 +1,8 @@
-﻿/** 
+﻿/**
  * Utility Class used to pass question data between modules
  */
 
+using System;
 [System.Serializable]
 public class Card {
 	/**
@@ -10,12 +11,16 @@ public class Card {
 	 */
 	public QuestionType myQuestionType;
 
-	/**
+    public int weight_ID; 
+    public string Cardname;
+
+
+    /**
 	 * Question Text
 	 * This text is parsed from the XML file and is displayed to the user when the question is asked
 	 * ex: How many roots does x^2-x-2 have?
 	 */
-	public string questionText;
+    public string questionText;
 
 	/**
 	 * Possible answers
@@ -45,16 +50,37 @@ public class Card {
 		correctAnswer = new Answer(answer);
 	}
 
-	/**
+
+    public Card(string text, string answer, string WID)
+    {
+        questionText = text;
+        correctAnswer = new Answer(answer);
+        int Number;
+        Int32.TryParse(WID, out Number);
+        weight_ID = Number;
+    }
+
+    public Card(string text, string answer, string WID, string Name)
+    {
+        questionText = text;
+        correctAnswer = new Answer(answer);
+        int Number;
+        Int32.TryParse(WID, out Number);
+        weight_ID = Number;
+        Cardname = Name;
+    }
+
+
+    /**
 	 * Game logic functions
 	 * Brought to you by Johnson & Johnson, a family company (thanks colin!)
 	 */
 
-	/** Check if solution is correct
+    /** Check if solution is correct
 	 *  TODO: Add spell error leniency (1 char off for every 4char beyond 1?)
 	 *  TODO: More versatile functionality
 	 */
-	public bool checkCorrectness(string submission) {
+    public bool checkCorrectness(string submission) {
 		return (submission == correctAnswer.textAnswer);
 	}
 	
@@ -63,8 +89,13 @@ public class Card {
 		//Debug.Log (questionText);
 		return questionText;
 	}
-	
-	public string getAnswer() {
+
+    public string Get_first_letter()
+    {
+        return "a";
+    }
+
+    public string getAnswer() {
 		// For now, return the textual answer
 		// But we need to encompass other answer types too.
 		return correctAnswer.textAnswer;

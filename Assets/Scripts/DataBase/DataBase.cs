@@ -25,17 +25,22 @@ public class DataBase {
 
 		XmlNodeList questionNodes = questionDoc.DocumentElement.SelectNodes ("/Flipbook/Card");
 
-		// For each question in the XML file...
-		foreach (XmlNode card in questionNodes) {
-			// Parse and assemble the question
-			Card newCard = new Card(card.SelectSingleNode("Question").InnerText, card.SelectSingleNode ("Answer").InnerText);
-			// Push the question into the binder
-			newBinder.addCard (newCard);
-		}
+        // For each question in the XML file...
+        foreach (XmlNode card in questionNodes)
+        {
+            // Parse and assemble the question
+            Card newCard = new Card(card.SelectSingleNode("Question").InnerText,
+                card.SelectSingleNode("Answer").InnerText, card.SelectSingleNode("WeightID").InnerText,
+                card.SelectSingleNode("Name").InnerText);
+            // Push the question into the binder
+            newBinder.addCard(newCard);
+        }
 
-		// Now we here
-		// Add the set to the collection and return its ID number
-		loadedBinders.Add (newBinder); // Binders full of women
+
+
+        // Now we here
+        // Add the set to the collection and return its ID number
+        loadedBinders.Add (newBinder); // Binders full of women
 		return (loadedBinders.Count - 1);
 	}
 
