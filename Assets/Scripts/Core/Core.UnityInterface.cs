@@ -49,6 +49,6 @@ public partial class Core : MonoBehaviour{
 	 * This function displays an error when the player's index is out of range
 	 */
 	void DebugPlayerIndex(int playerID){
-		Debug.Log ("Error: Player " + playerID.ToString() + " does not exist\nOnly "+players.Count.ToString()+" people are playing");
+		Debug.Log ("Error: Player " + (playerID+1).ToString() + " does not exist\nOnly "+players.Count.ToString()+" people are playing");
 	}
 }
