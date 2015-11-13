@@ -4,6 +4,14 @@
 
 [System.Serializable]
 public class Answer {
+
+	public Answer(){
+		// Resets the multiple choice answer
+		multipleChoiceAnswer = defaultmultipleChoiceAnswer;
+
+		// Resets the short answer answer
+		textAnswer = defaultTextAnswer;
+	}
 	/**
 	 * The type of question being answered
 	 * ex: MultipleChoice, ShortAnswer
@@ -15,14 +23,14 @@ public class Answer {
 	 * ex: a, b, c, d, e, ..., etc.
 	 */
 	const char defaultmultipleChoiceAnswer = '-';
-	public char multipleChoiceAnswer = defaultmultipleChoiceAnswer;
+	public char multipleChoiceAnswer;
 
 	/** 
 	 * The answer for a short answer question
 	 * ex: 5, 2, 7, Fresno
 	 */
 	const string defaultTextAnswer = "-";
-	public string textAnswer = defaultTextAnswer;
+	public string textAnswer;
 
 	public Answer(string inputAnswer){
 		textAnswer = inputAnswer;
@@ -40,5 +48,12 @@ public class Answer {
 			(textAnswer!=defaultTextAnswer)
 		);
 
+	}
+
+	/**
+	 * Returns true iff this question does not have an answer is one of it's fields
+	 */
+	public bool isNotAnswered(){
+		return !isAnswered ();
 	}
 }
