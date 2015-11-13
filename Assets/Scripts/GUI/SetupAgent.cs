@@ -22,8 +22,17 @@ public class SetupAgent : MonoBehaviour {
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 		
-		// Initialize sliders with the last used values
+		/**
+		 * Initialize sliders with the last used values
+		 */
+
+		// Load last preferences for how many cards to put in the deck
 		numberOfCards.text = myCore.myDataBase.deckPreferences.numberOfCards.ToString();
+
+		// Load the player's last nickname
+		// Right now this is hard coded for P1
+		// TODO: Generalize to all players
+		playerName.text = myCore.players [0].playerName;
 	}
 	
 	
@@ -55,23 +64,46 @@ public class SetupAgent : MonoBehaviour {
 		myCore.setNumberOfCards (max);
 
 	}
+
+	/**
+	 * Lets the player type in a custom name
+	 * Currently it is hard coded to player one
+	 * TODO: Generalize the UI to allow multiple players
+	 */
+	public void updatePlayerName(){
+		// Make sure we have a reference to our Game Object
+		loadCache ();
+
+		// Find new name for player
+		string newName = playerName.text;
+
+		// Store new name in Core
+		myCore.players [0].playerName = newName;
+
+	}
 	
 
 	
 	// Cache the on screen objects to improve performance
 	Core myCore;
 	InputField numberOfCards;
+	InputField playerName;
 	
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
-		// Find Core
+		// Find myCore
 		if (myCore == null) {
 			myCore = GameObject.Find ("GameCore").GetComponent<Core>();
 		}
 		
-		// Find myAnswer
+		// Find numberOfCards
 		if (numberOfCards == null) {
 			numberOfCards=GameObject.Find ("NumberOfCards").GetComponent<InputField> ();
+		}
+
+		// Find playerName
+		if (playerName == null) {
+			playerName=GameObject.Find ("PlayerNameInput").GetComponent<InputField> ();
 		}
 	}
 	
