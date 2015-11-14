@@ -49,8 +49,11 @@ public class GUI {
 	 * hide and make the button appear.
 	 */
 	public void displayQuestionResults (Results theResults){
-		GameObject myViewGradeResult = GameObject.Find ("viewGradeResult");
+		// Audio to play on question load
+		GameObject myViewGradeResult = GameObject.Find ("viewGradeResult"); 
+		// Gives feedback on correctness
 		GameObject myViewGradeText = GameObject.Find ("viewGradeText");
+		// Moves on to next question ("Onwards!")
 		GameObject myViewNextButton = GameObject.Find ("viewNextButton");
 
 		//Image myViewGradeResultImage = myViewGradeResult.GetComponents<Image> ();

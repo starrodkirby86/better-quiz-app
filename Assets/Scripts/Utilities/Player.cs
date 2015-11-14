@@ -36,7 +36,7 @@ public class Player {
 	 * The player's last answer. The core should set this to null before pushing the next question to the GUI.
 	 * The GUI will then fill in the player's answer to the question and pass this object back
 	 */
-	public Answer lastAnswer;
+	public Answer lastAnswer=null;
 
 	/** 
 	 * True iff the player is ready to move to the next question
