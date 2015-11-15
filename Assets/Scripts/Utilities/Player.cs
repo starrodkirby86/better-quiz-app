@@ -8,6 +8,7 @@ public class Player {
 	public Player(string playerName){
 		this.playerName = playerName;
 		this.playerID = Player.lastPlayerID + 1;
+		this.lastAnswer = new Answer ();
 		Player.lastPlayerID++;
 	}
 
