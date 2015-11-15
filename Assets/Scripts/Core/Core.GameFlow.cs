@@ -79,6 +79,8 @@ public partial class Core : MonoBehaviour{
 	 * DisplayAgent will call this function to pass the player's answer to the core. Once all the players have answered, the Core will call grade()
 	 */
 	public void playerAnswer(int playerID, Answer playerAnswer){
+		//Debug.Log ("Running playerAnswer with "+playerID+"and our wonderful input answer, "+playerAnswer.textAnswer);
+
 		Debug.Log ("grading " + playerID.ToString ()+": "+players [playerID].lastAnswer.isAnswered().ToString());
 		// Store player's answer
 		if ((players.Count > playerID) && (players [playerID].lastAnswer.isNotAnswered()))

@@ -17,7 +17,7 @@ public partial class Core : MonoBehaviour{
 
 		// Clear old answers
 		foreach (Player i in players)
-			i.lastAnswer = null;
+			i.lastAnswer = new Answer();
 
 		// Push new question to all screens
 		currentCard=myDeck.drawCard();

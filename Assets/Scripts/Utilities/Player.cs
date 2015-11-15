@@ -1,4 +1,7 @@
-﻿/**
+﻿using UnityEngine;					// For MonoBehaviour
+using System.Collections.Generic; 	// For Lists
+
+/**
  * Utility Class used to hold player data
  */
 
@@ -8,6 +11,7 @@ public class Player {
 	public Player(string playerName){
 		this.playerName = playerName;
 		this.playerID = Player.lastPlayerID + 1;
+		this.lastAnswer = new Answer();
 		Player.lastPlayerID++;
 	}
 
@@ -36,7 +40,7 @@ public class Player {
 	 * The player's last answer. The core should set this to null before pushing the next question to the GUI.
 	 * The GUI will then fill in the player's answer to the question and pass this object back
 	 */
-	public Answer lastAnswer=null;
+	public Answer lastAnswer= new Answer();
 
 	/** 
 	 * True iff the player is ready to move to the next question
