@@ -1,5 +1,5 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TimerAgent : MonoBehaviour {
@@ -8,14 +8,18 @@ public class TimerAgent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		counter = 500; 
+		GameObject.Find ("timerText").GetComponent<Text>().text = (counter = 500).ToString();
+
 	}
 	
 	// Update is called once per frame
+	/**
+	 * TODO: What should you do after time runs out?
+	 */
 	void Update () {
 		if (counter > 0)
-			counter -= 1 * Time.deltaTime;
+			GameObject.Find ("timerText").GetComponent<Text>().text = (counter -= 1 * Time.deltaTime).ToString ();
 		else
-			Debug.Log ("Player is supposed to stop answering. STOP IT.");
+			Debug.Log ("Player is supposed to stop answering. STOP IT."); // Insert code
 	}
 }
