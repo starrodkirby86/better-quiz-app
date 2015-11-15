@@ -18,10 +18,16 @@ public class Binder {
 	public string nickname;
 
 	/**
-	 * The relative chance of pulling a card from this binder after it is compilled into a deck
+	 * The relative chance of pulling a card from this binder after it is compiled into a deck
 	 * A weight of zero means to include no cards from this binder
 	 */
 	public int weight;
+
+    /**
+     * Allows the user to adjust what cards will be drawn based on the subjective difficulty of
+     * the questions.
+     */
+    public int difficulty;
 
 	/**
 	 * An array of all the cards in this binder. The cards in the list can be of any question type (multiple choice, short answer, etc)
@@ -35,6 +41,7 @@ public class Binder {
 		filename = name;
 		myCards = new List<Card> ();
         weight = 1;
+        difficulty = 1;
 	}
 
 	/**

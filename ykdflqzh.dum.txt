@@ -1,0 +1,10 @@
+﻿Initial setup for difficulty option
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch UX_Kevin
+# Your branch is up-to-date with 'origin/UX_Kevin'.
+#
+# Changes to be committed:
+#	modified:   Assets/Scripts/Utilities/Binder.cs
+#
+
