@@ -50,7 +50,7 @@ public class DisplayAgent : MonoBehaviour {
 	 */
 	public void playerAnswered()
 	{
-		Debug.Log ("player answered");
+		Debug.Log ("The player... has answered! (from DisplayAgent playerAnswer()");
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 
@@ -66,6 +66,7 @@ public class DisplayAgent : MonoBehaviour {
 		// Pass it to the core for grading.
 		// Hardcoded as 1 because you only have one player.
 		// TODO: Have the DisplayAgent recognize which player it is
+
 		myCore.playerAnswer (myCore.players[0].playerID, myAnswer);
 	}
 
@@ -87,6 +88,7 @@ public class DisplayAgent : MonoBehaviour {
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
 		// Find Core
+
 		if (myCore == null) {
 			myCore = GameObject.Find ("GameCore").GetComponent<Core>();
 		}
