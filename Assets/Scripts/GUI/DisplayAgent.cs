@@ -54,6 +54,9 @@ public class DisplayAgent : MonoBehaviour {
 		// Make sure we have a reference to our Game Object
 		loadCache ();
 
+		// Set timer flag false
+		myTimer.stopTimer();
+
 		// That InputField object has the text string, so we grab that
 		// declare a new answer obj passing that text string in the constructor
 		// WHERE MY LINES OF CODE AT
@@ -84,6 +87,7 @@ public class DisplayAgent : MonoBehaviour {
 	Core myCore;
 	Text questionText;
 	InputField shortAnswerInput;
+	TimerAgent myTimer;
 
 	// Searches out the game for our objects. Caching them improves performance
 	void loadCache(){
@@ -100,7 +104,12 @@ public class DisplayAgent : MonoBehaviour {
 		 
 		// Find myAnswer
 		if (shortAnswerInput == null) {
-			shortAnswerInput=GameObject.Find ("viewInputAnswer").GetComponent<InputField> ();
+			shortAnswerInput = GameObject.Find ("viewInputAnswer").GetComponent<InputField> ();
+		}
+
+		// Find myTimer
+		if (myTimer == null) {
+			myTimer = GameObject.Find ("timerText").GetComponent<TimerAgent>();
 		}
 	}
 

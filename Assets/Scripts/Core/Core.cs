@@ -53,4 +53,8 @@ public partial class Core : MonoBehaviour {
 	 */
 	public Results currentResults;
 
+	/**
+	 * Game preferences.
+	 */
+	public GamePreferences myPreferences;
 }
