@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[System.Serializable]
 public class TimerAgent : MonoBehaviour {
 
 	float counter;
@@ -14,6 +15,7 @@ public class TimerAgent : MonoBehaviour {
 	 * Stops the timer. Actually, it's just a flag to false.
 	 */
 	public void stopTimer(){
+		Debug.Log ("I ran so far away.");
 		timerFlag = false;
 	}
 	
@@ -43,8 +45,8 @@ public class TimerAgent : MonoBehaviour {
 			GameObject.Find ("timerText").GetComponent<Text>().text = Mathf.Floor ((counter -= 1 * Time.deltaTime)).ToString ();
 		else
 		{
-			if(myCore.playersNotReady() == 0)
-				GameObject.Find ("DisplayAgent").GetComponent<DisplayAgent>().playerAnswered();
+			//if(myCore.playersNotReady() == 0)
+				//GameObject.Find ("DisplayAgent").GetComponent<DisplayAgent>().playerAnswered();
 		}
 
 			//Debug.Log ("Player is supposed to stop answering. STOP IT."); // Insert code
