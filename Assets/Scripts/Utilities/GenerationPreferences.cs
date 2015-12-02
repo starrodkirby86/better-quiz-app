@@ -8,5 +8,10 @@ public class GenerationPreferences{
 	
 	// Maximum number of cards to generate
 	public int numberOfCards;
+};
 
+public class GamePreferences{
+
+	// Maximum time per question
+	public int timePerQuestion;
 };

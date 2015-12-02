@@ -54,6 +54,10 @@ public partial class Core : MonoBehaviour{
 		// Clear old results
 		myResults = new List<Results> ();
 
+		// Get game preferences
+		myPreferences = new GamePreferences();
+		myPreferences.timePerQuestion = 10;
+
 		// Ask the first question
 		startRound ();
 	}

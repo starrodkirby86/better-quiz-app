@@ -52,7 +52,7 @@ public partial class Core : MonoBehaviour{
 	/**
 	 * Returns how many players are not ready to move on
 	 */
-	int playersNotReady(){
+	public int playersNotReady(){
 		int result=0;
 		foreach (Player i in players) {
 			if(!i.isReady) result++;
