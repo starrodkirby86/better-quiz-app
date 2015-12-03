@@ -61,11 +61,15 @@ public class GUI {
 
 		// Update the contents depending on whether you got it right or not
 		if (theResults.isCorrect [0]) {
-			myViewGradeTextComponent.text = "Hey, " + theResults.players [0].playerName + ", you got this correct!";
+			myViewGradeTextComponent.text = "Hey, " + theResults.players [0].playerName + " got this correct!";
 			myViewGradeTextComponent.color = Color.green;
+			// Change the graphic to HAPPY
+			//(GameObject.Find ("playerReaction")).GetComponent<Image>().sprite = Resources.Load("Cerulean_Happy") as Sprite;
 		} else {
 			myViewGradeTextComponent.text = theResults.players [0].playerName + " got this wrong. You suck."; 
 			myViewGradeTextComponent.color = Color.red;
+			// Change the graphic to SAD
+			//(GameObject.Find ("playerReaction")).GetComponent<Image>().sprite = Resources.Load ("Cerulean_Sad") as Sprite;
 		}
 		// Make things appear.
 		// TODO: REFACTORING, I CALL DIBS, HANDS OFF NICK -- Watson

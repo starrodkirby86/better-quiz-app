@@ -59,6 +59,12 @@ public class GameOverAgent : MonoBehaviour {
 		}
 	}
 
+	public void killGame(){
+		// Nooo... :(
+		// For the demonstration.
+		Application.Quit();
+	}
+
 	// Use this for initialization
 	void Start () {
 	
