@@ -3,6 +3,9 @@
  */
 
 using System;
+using System.Linq;
+
+
 [System.Serializable]
 public class Card {
 	/**
@@ -11,7 +14,8 @@ public class Card {
 	 */
 	public QuestionType myQuestionType;
 
-    public int weight_ID; 
+    public int weight_ID;
+    public int random_ID;
     public string Cardname;
 
 
@@ -48,7 +52,11 @@ public class Card {
 	public Card(string text, string answer) {
 		questionText = text;
 		correctAnswer = new Answer(answer);
-	}
+        weight_ID = 0;
+        Cardname = null;
+        random_ID = 0;
+
+    }
 
 
     public Card(string text, string answer, string WID)
@@ -58,6 +66,8 @@ public class Card {
         int Number;
         Int32.TryParse(WID, out Number);
         weight_ID = Number;
+        Cardname = null;
+        random_ID = 0;
     }
 
     public Card(string text, string answer, string WID, string Name)
@@ -68,6 +78,7 @@ public class Card {
         Int32.TryParse(WID, out Number);
         weight_ID = Number;
         Cardname = Name;
+        random_ID = 0;
     }
 
 
@@ -89,12 +100,16 @@ public class Card {
 		//Debug.Log (questionText);
 		return questionText;
 	}
-
+    public int Get_ID()
+    {
+        return  weight_ID;
+    }
     public string Get_first_letter()
     {
-        return "a";
+        string sub = Cardname.Substring(0);
+        return sub;
     }
-
+     
     public string getAnswer() {
 		// For now, return the textual answer
 		// But we need to encompass other answer types too.

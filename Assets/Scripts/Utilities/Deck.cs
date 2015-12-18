@@ -15,9 +15,13 @@ public class Deck {
 	/**
 	 * An array of cards that have already been drawn
 	 */
-	List<Card> discardPile = new List<Card>();
+	List<Card> discardPile = new List<Card>(); 
 
 
+    public Deck(int number , C_Table A)
+    {
+        
+    }
 	/**
 	 * Function to add an array of cards into the deck
 	 */
@@ -72,6 +76,84 @@ public class Deck {
 	/**
 	 * A function to shuffle the drawPile with the discardPile. Result will go into the drawPile. Call before the game starts
 	 */
+
+
+     public void merge()
+    {
+        foreach (Card i in discardPile)
+        {
+            drawPile.Add(i);
+            discardPile.Remove(i);
+        }
+    }
+
+    public void Cycle_Lead(int head)
+    {
+        Card temp = null;
+        Card End = drawPile[head];
+        int i = 0;
+        int n = drawPile.Count;
+        for (i = head * 2 % (2 * (n + 1)); i != head; i = (2 * i) % (2 * n + 1))
+        {
+            temp = drawPile[i - 1];
+            drawPile[i - 1]= End;
+            End = temp;
+        }
+        drawPile[head] = End;
+    }
+
+    public void reverse(int For,int End) {
+        Card myCard = null;
+        while (For < End)
+        {
+            myCard = drawPile[For];
+            drawPile[For] = drawPile[End];
+            drawPile[End] = myCard;
+
+        }
+
+    }
+
+    public void shift_N(int m ,int n)
+    {
+        reverse(m + 1, n);
+        reverse(n + 1, 2*n);
+        reverse(m + 1, n);
+    }
+
+    
+    public void shuffle(int HalfSize ,int m)
+    {
+        Card Temp = null; 
+        if (HalfSize ==1)
+        {
+            Temp = drawPile[0];
+            drawPile[0] = drawPile[1];
+            drawPile[1] = Temp;
+            return;
+        }
+        if (HalfSize > 1)
+        {  int m2 = 1;
+           int k = 0;
+            while ((2 * HalfSize)/ m2 >= 3)
+            {
+                k++;
+                m2 = m2 * 3;
+            }
+            m = m + (m2 / 2);
+            this.shift_N(m, HalfSize);
+            for(int i=0; i< k; i++)
+            {
+                int h = 1;
+                this.Cycle_Lead(h);
+                h = h * 3;
+            }
+            this.shuffle(HalfSize - m, 2 * m);
+        }
+       
+    }
+
+
 	public void shuffleDeck(){
 
 		// Combine drawPile with discardPile and store in drawPile
