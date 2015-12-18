@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic; 
+﻿using System.Collections.Generic;
 
 /** 
  * Utility Class used to hold all the cards for this game
@@ -7,14 +7,16 @@
 public class C_Heap
 {
     public List<Card> Table = new List<Card>();
-    public void Insertion(Card A){
+    public C_Heap(){ }
+    public void Insertion(Card A)
+    {
         if (Table.Count == 0)
         {
             Table.Insert(0, A);
         }
         int Child = Table.Count - 1;
         int Parent = (Child - 1) / 2;
-        while(Parent>=0 && Table[Parent].random_ID> Table[Child].random_ID)
+        while (Parent >= 0 && Table[Parent].random_ID > Table[Child].random_ID)
         {
             Card temp = Table[Parent];
             Table[Parent] = Table[Child];
@@ -22,7 +24,7 @@ public class C_Heap
             Child = Parent;
             Parent = (Child - 1) / 2;
         }
-        
+
     }
     public Card Get_Min()
     {
@@ -34,8 +36,13 @@ public class C_Heap
         return Table;
     }
 
-   public void RemoverMin()
-    { 
+    public int Count()
+    {
+        return Table.Count;
+    }
+
+    public void RemoverMin()
+    {
         Table[0] = Table[Table.Count - 1];
         Table.RemoveAt(Table.Count - 1);
         int Parent = 0;
@@ -51,14 +58,14 @@ public class C_Heap
             {
                 break;
             }
-           
-            if(Table[LeftChild].random_ID<= Table[RightChild].random_ID)
+
+            if (Table[LeftChild].random_ID <= Table[RightChild].random_ID)
             {
-                 minID = LeftChild;
+                minID = LeftChild;
             }
             else
             {
-                 minID = RightChild;
+                minID = RightChild;
             }
 
             if (Table[Parent].random_ID < Table[minID].random_ID)
@@ -69,7 +76,9 @@ public class C_Heap
                 Parent = minID;
 
             }
-            else { break; } // comment dddd
+            else { break; }
         }
+
     }
+
 }

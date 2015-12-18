@@ -15,12 +15,42 @@ public class Deck {
 	/**
 	 * An array of cards that have already been drawn
 	 */
-	List<Card> discardPile = new List<Card>(); 
+	List<Card> discardPile = new List<Card>();
 
 
-    public Deck(int number , C_Table A)
+    public Deck(int number, C_Table A)
     {
-        
+        int i, j;
+        C_Heap Heap = new C_Heap();
+        for (i = 0; i < 25; i++)
+        {
+            for (j = 0; j < 6; j++)
+            {
+                if (A.Table[i, j].Get_Root() != null)
+                {
+                    C_Nodes Temp = A.Table[i, j].Get_Root();
+                    while (Temp.Get_Next() != null)
+                    {
+                        Temp.Get_Card(Temp).random_ID = Random.Range(0, 1) ^ (1 / (Temp.Get_Card(Temp).random_ID));
+                        if (Heap.Count() < number)
+                        {
+                            Heap.Insertion(Temp.Get_Card(Temp));
+                        }
+                        else
+                        {
+                            if (Heap.Get_Min().random_ID < Temp.Get_Card(Temp).random_ID)
+                            {
+                                Heap.RemoverMin();
+                                Heap.Insertion(Temp.Get_Card(Temp));
+                            }
+
+                        }
+                        Temp.Get_Next();
+                    }
+
+                }
+            }
+        }
     }
 	/**
 	 * Function to add an array of cards into the deck
