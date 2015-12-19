@@ -5,7 +5,6 @@
 using System;
 using System.Linq;
 
-
 [System.Serializable]
 public class Card {
 	/**
@@ -18,6 +17,9 @@ public class Card {
     public int random_ID;
     public string Cardname;
 
+    /* adding two vardiable  weight_ID , and  randomID , random_ID is used for algorithem 
+    random_ID is equal to  ramdom(0,1)^(1/weight_ID) Done this operation in the Deck generator(construct)
+*/
 
     /**
 	 * Question Text
@@ -59,7 +61,7 @@ public class Card {
     }
 
 
-    public Card(string text, string answer, string WID)
+    public Card(string text, string answer, string WID) 
     {
         questionText = text;
         correctAnswer = new Answer(answer);
@@ -104,7 +106,7 @@ public class Card {
     {
         return  weight_ID;
     }
-    public string Get_first_letter()
+    public string Get_first_letter() // use it to get the first letter of the string //
     {
         string sub = Cardname.Substring(0);
         return sub;

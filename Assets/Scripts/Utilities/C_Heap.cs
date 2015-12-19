@@ -4,11 +4,12 @@
  * Utility Class used to hold all the cards for this game
  */
 [System.Serializable]
+// impelement heap for the weighted selecting algoritem//
 public class C_Heap
 {
-    public List<Card> Table = new List<Card>();
+    public List<Card> Table = new List<Card>(); // it is basic a list  
     public C_Heap(){ }
-    public void Insertion(Card A)
+    public void Insertion(Card A) 
     {
         if (Table.Count == 0)
         {
@@ -41,7 +42,7 @@ public class C_Heap
         return Table.Count;
     }
 
-    public void RemoverMin()
+    public void RemoverMin() // an ugly removing root, sorry about that//
     {
         Table[0] = Table[Table.Count - 1];
         Table.RemoveAt(Table.Count - 1);

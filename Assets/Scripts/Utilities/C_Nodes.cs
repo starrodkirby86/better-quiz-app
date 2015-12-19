@@ -1,4 +1,5 @@
 ﻿[System.Serializable]
+// tpyical linklist impelement nothing to say//
 public class C_Nodes
 {
     public Card Data;

@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using System.Text;
 using System;
-
+// The Table to to construct the data , A 2D-array Array of Linklist
 [System.Serializable]
 public class C_Table
 {
-    public const int tablelength = 25;
-    public const int tablewidth = 6;
+    public const int tablelength = 25; // Length = alphbelt
+    public const int tablewidth = 6;   // width is consit of different degree of weight_ID
     public C_List[,] Table;
 
-    public C_Table()
+    public C_Table() // constructor 
     {
         Table = new C_List[tablelength, tablewidth];
         for (int i = 0; i < tablelength; i++)
@@ -21,8 +21,9 @@ public class C_Table
 
         }
     }
-
-    public static int Get_POS_ID(string text)
+    // Input :question Name; output Fisrt letter corresponding  to their code a - p//
+    public static int Get_POS_ID(string text) 
+                                       
     {
         int sum = 0;
         foreach (char c in text)
@@ -31,8 +32,8 @@ public class C_Table
         }
         return sum;
     }
-
-    public void insert(Card myCard)
+    // insert a card from xml file, located first then push into linklist//
+    public void insert(Card myCard)  
     {
         C_Nodes NewNode = new C_Nodes(myCard);
         string alplha = myCard.Get_first_letter();
@@ -41,7 +42,7 @@ public class C_Table
         this.Table[i, j].Insert(NewNode);
         return;
     }
-
+    //input CurrentI(pre) and Node, then change its postion due to its new weight_ID//
     public void change(C_Nodes A, int Pre)
     {
         string alplha = A.Get_Card(A).Get_first_letter();
@@ -51,7 +52,7 @@ public class C_Table
         this.Table[i, Pre].delete(A);
         return;
     }
-
+    //search by first letter of question name//
     public Card Search(string letter)
     {
         string subletter = letter.Substring(0);
@@ -65,7 +66,7 @@ public class C_Table
         }
         return Mycard;
     }
-
+    //
     public Card Get_Card(int ID, string letter, int pos)
     {
         int Num = Get_POS_ID(letter);
@@ -73,7 +74,7 @@ public class C_Table
     }
 
 
-
+    //If the Cell in the array is null ,search the the nearest cell//
     public C_List Nearest_One(int length, int width)
     {
         int i = 0;

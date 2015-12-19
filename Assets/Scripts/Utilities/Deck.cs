@@ -17,19 +17,22 @@ public class Deck {
 	 */
 	List<Card> discardPile = new List<Card>();
 
-
+    // Deck gererator  , depending on which table you want to use , and how many one you want to choose//
+    /*  step1:ramdom(0,1)^(1/weight_ID)  for each card 
+        step2; Choose the K item with smallest R* 
+        ex:w1 = 5 , w2 = 6 , w3= 7 k=1 , then get item with W1 and W2*/
     public Deck(int number, C_Table A)
     {
         int i, j;
         C_Heap Heap = new C_Heap();
-        for (i = 0; i < 25; i++)
+        for (i = 0; i < 25; i++)  
         {
             for (j = 0; j < 6; j++)
             {
                 if (A.Table[i, j].Get_Root() != null)
                 {
                     C_Nodes Temp = A.Table[i, j].Get_Root();
-                    while (Temp.Get_Next() != null)
+                    while (Temp.Get_Next() != null)    /*from first for to here  tranverwsal */
                     {
                         Temp.Get_Card(Temp).random_ID = Random.Range(0, 1) ^ (1 / (Temp.Get_Card(Temp).random_ID));
                         if (Heap.Count() < number)
@@ -43,7 +46,7 @@ public class Deck {
                                 Heap.RemoverMin();
                                 Heap.Insertion(Temp.Get_Card(Temp));
                             }
-
+                            // using heap get maintain the minium in container 
                         }
                         Temp.Get_Next();
                     }
@@ -51,11 +54,12 @@ public class Deck {
                 }
             }
         }
+        drawPile = Heap.Get_List(); // since the heap is implement by list , we directly use it 
     }
 	/**
 	 * Function to add an array of cards into the deck
 	 */
-	public void addManyCards(Card[] newCards){
+    public void addManyCards(Card[] newCards){
 		foreach (Card i in newCards) {
 			addCard(i);
 		}
@@ -116,13 +120,27 @@ public class Deck {
             discardPile.Remove(i);
         }
     }
+    /*  from here the algorithm for doing the  Shuffles
+        input {a1,a2,a3,...,an,b1,b2,b3,...,bn}  output:{a1,b1,a2,b2,....,an,bn}
 
-    public void Cycle_Lead(int head)
+    */
+    /* the shuffing Algo here input:
+    a1,a2,a3,a4,a5,a6,a7,a8 output: a5,a1,a6,a2,a7,a3,a8,a4
+    1  2  3  4  5  6  7  8           1  2  3  4  5  6  7 8
+    cycle 1: 1->2->4->8->7->5->1
+    cycle 2: 3->6->3 
+    i+1 =(2 * i) % (2 * n + 1)   n is the half length of th lis 
+    head 1= 1 , head 2 =3
+    if we moving this two cycle ,we get shufferd 
+    let a list A have length 2N, then if exist K , s.t  2^N = 3^k-1
+    then the head i = 3^(i-1)
+  */
+    public void Cycle_Lead(int head) // do the cycling shifting 
     {
         Card temp = null;
         Card End = drawPile[head];
         int i = 0;
-        int n = drawPile.Count;
+        int n = drawPile.Count/2;
         for (i = head * 2 % (2 * (n + 1)); i != head; i = (2 * i) % (2 * n + 1))
         {
             temp = drawPile[i - 1];
@@ -142,15 +160,16 @@ public class Deck {
 
         }
 
-    }
+    }  /* reverse algorithem  just to reveset item in the list input : { a1. a2, a3 ,a4, a5 a6} 
+    reverse(0,3) the output {a4.a3,a2,a1}*/
 
-    public void shift_N(int m ,int n)
+    public void shift_N(int m ,int n) /*shifting form the m-1th pos of list to Nth next to the right*/
     {
         reverse(m + 1, n);
         reverse(n + 1, 2*n);
         reverse(m + 1, n);
     }
-
+    // M is the value statisfy 2^m = 3^k-1
     
     public void shuffle(int HalfSize ,int m)
     {
@@ -158,7 +177,7 @@ public class Deck {
         if (HalfSize ==1)
         {
             Temp = drawPile[0];
-            drawPile[0] = drawPile[1];
+            drawPile[0] = drawPile[1]; 
             drawPile[1] = Temp;
             return;
         }
@@ -178,12 +197,13 @@ public class Deck {
                 this.Cycle_Lead(h);
                 h = h * 3;
             }
+             // finsh first M ,then call do the recurrence
             this.shuffle(HalfSize - m, 2 * m);
         }
        
     }
 
-
+    /* to here the shuffling algo*/
 	public void shuffleDeck(){
 
 		// Combine drawPile with discardPile and store in drawPile
@@ -192,8 +212,8 @@ public class Deck {
 			discardPile.Remove (i);
 		}
 
-		// Shuffles the drawPile
-		for (int i = 0; i < drawPile.Count; i++) {
+        // Shuffles the drawPile  Shuffles the 
+        for (int i = 0; i < drawPile.Count; i++) {
 			Card temp = drawPile [i];
 			int randomIndex = Random.Range (i, drawPile.Count);
 			drawPile [i] = drawPile [randomIndex];

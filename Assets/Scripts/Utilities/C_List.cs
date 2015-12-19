@@ -1,4 +1,5 @@
 ﻿[System.Serializable]
+// typical linklist class ,write this since want to add search by letter function//
 public class C_List
 {
     public C_Nodes RootNode;
