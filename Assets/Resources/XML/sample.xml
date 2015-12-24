@@ -1,4 +1,12 @@
 <Flipbook>
+	<Card>
+		<Question>Who is the Cool Kid?
+		A: Heats Flamesman
+		B: Dr. Liu's secret mahjong games
+		C: HL3 is cancelled forever
+		D: Skill-based combat</Question>
+		<Answer>C</Answer>
+	</Card>
   <Card>
     <Question>
     This is a particular kind of blue cheese from Southern France that's white, tangy, crumbly, and has a distinctive vein of green mold.
@@ -24,10 +32,12 @@
     </Question>
     <Answer>Cheddar</Answer>
   </Card>
+  </Card>
   <Card>
     <Question>
     A dutch cheese from Holland. Its quality and flavor can vary from mild and creamy to hard and grumbly. Long-aged ones of this kind have a crunchy texture, so it can make for a good parmesan. Great for melting or toppings.
     </Question>
     <Answer>Gouda</Answer>
   </Card>
+	</Card>
 </Flipbook>

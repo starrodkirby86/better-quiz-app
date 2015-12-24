@@ -26,10 +26,11 @@ public partial class Core : MonoBehaviour{
 		Debug.Log ("Setting up game...");
 
 		// Hardcode test XML database
-		addBinderFromXML ("sample");
-		addBinderFromXML ("smashBros");
+		//addBinderFromXML ("sample");
+		addBinderFromXML ("Cheese");
+		//addBinderFromXML ("smashBros");
 		addBinderFromXML ("TimeComplexity");
-		addBinderFromXML ("doesWeebStuffWorkOnHere");
+		//addBinderFromXML ("doesWeebStuffWorkOnHere");
 
 		// add a dummy player
 		addPlayer ("P1"); 
@@ -56,7 +57,7 @@ public partial class Core : MonoBehaviour{
 
 		// Get game preferences
 		myPreferences = new GamePreferences();
-		myPreferences.timePerQuestion = 10;
+		myPreferences.timePerQuestion = 60;
 
 		// Ask the first question
 		startRound ();

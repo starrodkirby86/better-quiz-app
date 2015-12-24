@@ -1,62 +1,214 @@
 <Flipbook>
-  <Card>
-    <Question>
-    Which data structure has a time complexity of O(1) for access?
-    A: Array
-    B: Singly-Linked List
-    C: Stack
-    D: Binary Search Tree
-    </Question>
-    <Answer>A</Answer>
-  </Card>
-  <Card>
-    <Question>
-    Which data structure does NOT have a time complexity of O(N) for search?
-    A: Singly-Linked List
-    B: Array
-    C: Binary Search Tree
-    D: Stack
-    </Question>
-    <Answer>C</Answer>
-  </Card>
-  <Card>
-    <Question>
-    What is the average time complexity of selection sort?
-    A: O(n)
-    B: O(n log(n))
-    C: O(n+k)
-    D: O(n^2)
+<Card>
+<Question>
+Which data structure has a time complexity of O(1) for access?
+A: Array
+B: Singly-Linked List
+C: Stack
+D: Binary Search Tree
+</Question>
+<Answer>A</Answer>
+</Card>
+<Card>
+<Question>
+Which data structure does NOT have a time complexity of O(N) for search?
+A: Singly-Linked List
+B: Array
+C: Binary Search Tree
+D: Stack
+</Question>
+<Answer>C</Answer>
+</Card>
+<Card>
+<Question>
+What is the average time complexity of selection sort?
+A: O(n)
+B: O(n log(n))
+C: O(n+k)
+D: O(n^2)
+</Question>
+<Answer>D</Answer>
+</Card>
+<Card>
+<Question>
+What is the average time complexity of quick sort?
+A: O(n)
+B: O(n log(n))
+C: O(n+k)
+D: O(n^2)
+</Question>
+<Answer>B</Answer>
+</Card>
+<Card>
+<Question>
+Which data structure has a time complexity of O(1) for deletion?
+A: Stack
+B: Doubly-Linked list
+C: Binary Search Tree
+D: Array
+</Question>
+<Answer>B</Answer>
+</Card>
+<Card>
+<Question>
+Which sorting algorithm does NOT have a worst case time complexity of O(n^2)?
+A: Quick Sort
+B: Selection Sort
+C: Insertion Sort
+D: Merge Sort
     </Question>
     <Answer>D</Answer>
   </Card>
-  <Card>
-    <Question>
-    What is the average time complexity of quick sort?
-    A: O(n)
-    B: O(n log(n))
-    C: O(n+k)
-    D: O(n^2)
-    </Question>
-    <Answer>B</Answer>
-  </Card>
-  <Card>
-    <Question>
-    Which data structure has a time complexity of O(1) for deletion?
-    A: Stack
-    B: Doubly-Linked list
-    C: Binary Search Tree
-    D: Array
-    </Question>
-    <Answer>B</Answer>
-  </Card>
-  <Card>
-    <Question>
-    Which sorting algorithm does NOT have a worst case time complexity of O(n^2)?
-    A: Quick Sort
-    B: Selection Sort
-    C: Insertion Sort
-    D: Merge Sort
-    </Question>
-    <Answer>D</Answer>
-  </Card>
+	<Card>
+		<Question>
+			Which software development methodology is characterized by brief daily meetings between the team leader and team members, along with an extended meeting once every 2-4 weeks?
+		</Question>
+		<Answer>Scrum</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Of these programming languages, which is characterized by its use of "lazy evaluation?"
+			A: Java
+			B: Perl
+			C: C#
+			D: Haskell
+		</Question>
+		<Answer>D</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which of these statements is TRUE in regards to classes and structs in C++?
+			A: The default scope of a struct is public and the default scope of a class is private.
+			B: Structs cannot have protected member variables.
+			C: Member variables in classes must have their access explicitly defined.
+			D: Like their C counterpart, structs in C++ have no concept of encapsulation, so everything is public.
+		</Question>
+		<Answer>A</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Who created C++?
+			A: John McCarthy
+			B: Bjarne Stroustrup
+			C: Dennis Ritchie
+			D: Linus Torvalds
+		</Question>
+		<Answer>B</Answer>
+	</Card>
+	<Card>
+		<Question>
+			There are three doors. Behind one of them is a prize. Once you pick a door, one of the unpicked doors is revealed to be empty, and you are given the chance to repick. If you repick, does your chance of winning increase?
+		</Question>
+		<Answer>Yes</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which one of these codenames has not been a name for any of Intel's processor microarchitectures?
+			A: Nehalem
+			B: Thuban
+			C: Skylake
+			D: Devil's Canyon
+		</Question>
+		<Answer>B</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Of these GPU microarchitectures, which was notorious for extremely high load temperatures?
+			A: Tahiti (Radeon 7000 Series)
+		        B: Kepler (GeForce 600, 700 Series)
+			C: Evergreen (Radeon 5000 Series)
+			D: Fermi (GeForce 400 Series)
+		</Question>
+		<Answer>D</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which one of these software development methodologies is known for using "story" cards with scenarios on them describing different requirements?
+			A: Scrum
+			B: Rational Unified Process
+			C: Extreme Programming
+			D: Waterfall
+		</Question>
+		<Answer>C</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which of these requirements is not generally considered a non-functional requirement?
+			A: Performance
+			B: Security
+			C: Compliance
+			D: None of the above
+		</Question>
+		<Answer>D</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which weather cloud type is usually a sign of impending thunderstorms?
+			A: Cumulonimbus clouds
+			B: Stratus clouds
+			C: Cumulus clouds
+			D: Altocirrus clouds
+		</Question>
+		<Answer>A</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Who usually teaches CSCI 176 (parallel processing) at Fresno State?
+			A: Dr. Jin Park
+			B: Dr. David Ruby
+			C: Dr. Ming Li
+			D: Dr. Shih-Hsi (Alex) Liu
+		</Question>
+		<Answer>A</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Who was originally supposed to teach CSCI 115 at Fresno State in Spring 2015 before Dr. Wilson was chosen to teach it?
+			A: Dr. Henderson Yeung
+			B: Dr. Shih-Hsi "Alex" Liu
+			C: Dr. Ming Li
+			D: Dr. Shigeko Seki
+		</Question>
+		<Answer>A</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which of the following professors has never been Chair of Computer Science at Fresno State?
+			A: Dr. Todd Wilson
+			B: Dr. Ming Li
+			C: Dr. Jin Park
+			D: Dr. Henderson Yeung
+		</Question>
+		<Answer>C</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which of these species does NOT give live birth?
+			A: Emu
+			B: Boa Constrictor
+			C: Komodo Dragon
+			D: Human
+		</Question>
+		<Answer>C</Answer>
+	</Card>
+	<Card>
+		<Question>
+			What/who has been the hide-and-seek champion of the world since 1958?
+			A: Waldo
+			B: Father
+			C: The semi-colon when programming
+			D: Watson Tungjunyatham
+		</Question>
+		<Answer>C</Answer>
+	</Card>
+	<Card>
+		<Question>
+			Which of these products can you NOT purchase on Amazon?
+			A: Depleted uranium
+			B: 55 gallons of water-based lubricant
+			C: Tobacco
+			D: Dead rabbit
+		</Question>
+		<Answer>C</Answer>
+	</Card>
 </Flipbook>
